@@ -24,4 +24,7 @@
 /acompanhar/#SerieId/serie/#ClienteId/cliente   AcompanharR     POST
 /acompanhar/#SerieId/todos                      ExpectadoresR   GET
 /acompanhar/#SerieId/todosf                     ExpectadoresFR   GET
- 
+-- Talaka Haskell
+
+/user/cadastrar                                 CadUserR        GET POST
+/projeto/cadastrar                              CadProjR        GET POST

@@ -22,17 +22,18 @@ User json
     login           Text
     email           Text
     pwd             Text
-    bio             Text
-    img             Text
-    cover           Text
+    bio             Textarea Maybe
+    img             Text Maybe
+    cover           Text Maybe
     dateBirth       Day
-
+    deriving Show
+    
 Adm
     name            Text
     login           Text
     pwd             Text
     img             Text
-
+    
 Project json 
     title           Text
     description     Text
@@ -40,5 +41,6 @@ Project json
     collected       Int
     dateBegin       Day -- yyyy-mm-dd
     dateEnd         Day
-    creator         UserId     
+    creator         UserId
+    deriving Show
     
