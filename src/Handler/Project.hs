@@ -90,15 +90,23 @@ getPerfilUserR usuarioId = do
 getPerfilProjectR :: ProjectId -> Handler Html
 getPerfilProjectR projectId = do
     projeto <- runDB $ get404 projectId
+    usuario <- runDB $ get404 $ projectCreator projeto
+    comentarios <-runDB $ selectList [CommentProject ==. projectId] [Desc CommentDateTime]
+    usuarios <- sequence $ map (\ x -> runDB $ get404 $ commentUser . entityVal $ x) comentarios
+    comenuser <- return . zip $ comentarios usuarios
     defaultLayout $ do
         [whamlet|
             <h1>
                 Nome: #{projectTitle projeto}
             <h1>
-                Criador: #{fromSqlKey $ projectCreator projeto}
+                Criador: #{userName usuario}
             <h1>
                 Data: #{show $ projectDateBegin projeto}
             <h1>
                 Meta: #{projectMeta projeto}
-            
+            <h3>
+                Comentários: 
+                $forall (c, u) <- comenuser
+                    #{commentComment c}
+                    #{userName u}
         |]

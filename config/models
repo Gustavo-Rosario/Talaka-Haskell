@@ -43,4 +43,12 @@ Project json
     dateEnd         Day
     creator         UserId
     deriving Show
+
+
+Comment
+    comment         Textarea
+    user            UserId
+    project         ProjectId
+    dateTime        UTCTime
+    report          Int
     
