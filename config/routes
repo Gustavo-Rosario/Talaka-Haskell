@@ -1,6 +1,27 @@
 /static StaticR Static appStatic
 
-/favicon.ico FaviconR GET
-/robots.txt RobotsR GET
+/                                               HomeR                GET
+/cor/#Text                                      CorR                 GET
+/p1                                             Pagina1R             GET
+/p2                                             Pagina2R             GET
+/p3                                             Pagina3R             GET
+/head/#String                                   HeadR                GET
+/listar                                         ListarR              GET
+/serie/cadastrar                                CadSerieR            GET POST
+/serie/#SerieId/perfil                          PerfilSerieR    GET
 
-/ HomeR GET 
+
+/serie                                          SerieR          POST
+/serie/#SerieId/consulta                        ConsultaSerieR  GET
+/serie/consulta/todos                           TodasSeriesR    GET
+/serie/#SerieId/apagar                          ApagarSerieR    DELETE
+/serie/#SerieId/alterar                         AlterarSerieR   PUT
+/serie/#SerieId/alterar/#Text/nome              AlterarNomeR    PATCH
+
+/cliente                                        ClienteR        POST
+/cliente/consulta/todos                         TodosClientesR  GET
+
+/acompanhar/#SerieId/serie/#ClienteId/cliente   AcompanharR     POST
+/acompanhar/#SerieId/todos                      ExpectadoresR   GET
+/acompanhar/#SerieId/todosf                     ExpectadoresFR   GET
+ 

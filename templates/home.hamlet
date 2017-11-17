@@ -1,0 +1,11 @@
+<nav>
+    <ul>
+        <li>
+            <a href=@{Pagina1R}>
+                Pagina 1
+        <li>
+            <a href=@{Pagina2R}>
+                Pagina 2
+        <li>
+            <a href=@{Pagina3R}>
+                Pagina 3

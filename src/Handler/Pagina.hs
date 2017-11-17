@@ -1,0 +1,148 @@
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE TypeFamilies #-}
+module Handler.Pagina where
+
+import Import
+import Text.Cassius
+import Database.Persist.Postgresql
+{- lucius {} | cassius sem nada | variavel no css = let depois do DO 
+#{} - pode ir no meio de um nome de funcao
+-}
+
+formSerie :: Form Serie
+formSerie = renderDivs $ Serie
+    <$> areq textField "Nome: " Nothing
+    <*> areq textField "Genero: " Nothing
+    <*> areq intField "Temporadas: " Nothing
+    <*> areq intField "Ano: " Nothing
+
+getPerfilSerieR :: SerieId -> Handler Html
+getPerfilSerieR serieid = do
+    serie <- runDB $ get404 serieid
+    defaultLayout $ do
+        [whamlet|
+            <h1>
+                Nome: #{serieNome serie}
+            <h2>
+                Genero: #{serieGenero serie}
+            <h2>
+                Qtd:  #{serieQtTemp serie}
+            <h2>
+                Ano: #{serieAno serie}
+        |]
+
+
+getCadSerieR :: Handler Html
+getCadSerieR = do
+    (widget, enctype) <- generateFormPost formSerie
+    defaultLayout $ do
+        [whamlet|
+            <form action=@{CadSerieR} method=post enctype=#{enctype}>
+                ^{widget}
+                <input type="submit" value="OK">
+        |]
+
+postCadSerieR :: Handler Html
+postCadSerieR = do
+    ((result,_),_) <- runFormPost formSerie
+    case result of
+        FormSuccess serie-> do
+            runDB $ insert serie
+            redirect CadSerieR
+        _ -> redirect HomeR
+        
+
+
+
+wid1 :: Widget
+wid1 = [whamlet|
+            <h1>
+                Conteudo Aqui!!
+            <img src=@{StaticR img_ppgs_jpg}>
+        |]
+safeHead :: [a] -> Maybe a 
+safeHead [] = Nothing
+safeHead (x:[]) = Nothing
+safeHead (x:_) = Just x
+
+
+getListarR :: Handler Html
+getListarR = do
+    lista <- return ["DBZ", "CDZ", "Gundam" , "POKEMON"] :: Handler [String]
+    defaultLayout $ do
+        [whamlet|
+            <ul>
+                $forall anime <- lista
+                    <li>
+                        #{anime}
+        |]
+
+
+getHeadR :: String -> Handler Html
+getHeadR texto = do
+    maybeletra <- return $ safeHead texto
+    defaultLayout $ do
+        [whamlet|
+            $maybe letra <- maybeletra
+                <h1>
+                    A LETRA EH: #{letra}
+            $nothing
+                <h1>
+                    ERROU....
+        |]
+
+getHomeR :: Handler Html
+getHomeR = do
+    defaultLayout $ do
+        addStylesheet $ StaticR css_bootstrap_css
+        toWidget $ $(cassiusFile "templates/home.cassius")
+        $(whamletFile "templates/home.hamlet")
+    
+getCorR :: Text -> Handler Html
+getCorR cor = do
+    defaultLayout $ do
+        toWidgetHead $[julius|
+            function ola(){
+                alert("ALOOOOO");
+            }
+        |]
+        toWidget $ [cassius|
+            h1
+                color: #{cor};
+            
+        |]
+        [whamlet|
+            <h1>
+                OLA MUNDO EM COR #{cor}
+            <button onclick="ola()"> 
+                Clique em mim
+        |]
+        
+getPagina1R :: Handler Html
+getPagina1R = do
+    defaultLayout $ do
+        [whamlet|
+            <h1>
+                PAGINA 1
+            ^{wid1}
+        |]
+    
+getPagina2R :: Handler Html
+getPagina2R = do
+    defaultLayout $ do
+        [whamlet|
+            <h1>
+                PAGINA 2
+        |]
+
+getPagina3R :: Handler Html
+getPagina3R = do
+    defaultLayout $ do
+        [whamlet|
+            <h1>
+                PAGINA 3
+        |]
