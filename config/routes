@@ -28,3 +28,6 @@
 
 /user/cadastrar                                 CadUserR        GET POST
 /projeto/cadastrar                              CadProjR        GET POST
+
+/perfil/#UserId                                 PerfilUserR     GET
+-- !/projeto/#ProjectId                            PerfilProjectR  GET

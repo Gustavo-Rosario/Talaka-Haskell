@@ -71,3 +71,18 @@ postCadUserR = do
             runDB $ insert user
             redirect CadUserR
         _ -> redirect HomeR
+
+
+getPerfilUserR :: UserId -> Handler Html
+getPerfilUserR usuarioId = do
+    usuario <- runDB $ get404 usuarioId
+    defaultLayout $ do
+        [whamlet|
+            <h1>
+                Nome: #{userName usuario}
+            <h1>
+                Login: #{userLogin usuario}
+            <h1>
+                Data: #{show $ userDateBirth usuario}
+            
+        |]
