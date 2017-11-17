@@ -86,3 +86,19 @@ getPerfilUserR usuarioId = do
                 Data: #{show $ userDateBirth usuario}
             
         |]
+        
+getPerfilProjectR :: ProjectId -> Handler Html
+getPerfilProjectR projectId = do
+    projeto <- runDB $ get404 projectId
+    defaultLayout $ do
+        [whamlet|
+            <h1>
+                Nome: #{projectTitle projeto}
+            <h1>
+                Criador: #{fromSqlKey $ projectCreator projeto}
+            <h1>
+                Data: #{show $ projectDateBegin projeto}
+            <h1>
+                Meta: #{projectMeta projeto}
+            
+        |]
