@@ -1,0 +1,8 @@
+body 
+    background-color:red
+    
+#sasuke
+    background-color:blue
+    
+.naruto
+    background-color:orange

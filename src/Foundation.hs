@@ -4,12 +4,14 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE ViewPatterns #-}
+{-# LANGUAGE QuasiQuotes #-}
 
 module Foundation where
 
 import Import.NoFoundation
 import Database.Persist.Sql (ConnectionPool, runSqlPool)
 import Yesod.Core.Types     (Logger)
+import Text.Cassius
 
 data App = App
     { appSettings    :: AppSettings
@@ -25,6 +27,23 @@ type Form a = Html -> MForm Handler (FormResult a, Widget)
 
 instance Yesod App where
     makeLogger = return . appLogger
+    defaultLayout w = do
+        p <- widgetToPageContent $ do
+            w
+            toWidget $ $(cassiusFile "templates/css/main.cassius")
+        msgs <- getMessages
+        withUrlRenderer [hamlet|
+            $newline never
+            $doctype 5
+            <html>
+                <head>
+                    <title>#{pageTitle p}
+                    ^{pageHead p}
+                <body>
+                    $forall (status, msg) <- msgs
+                        <p class="message #{status}">#{msg}
+                    ^{pageBody p}
+            |]
 
 instance YesodPersist App where
     type YesodPersistBackend App = SqlBackend

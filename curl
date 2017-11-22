@@ -1,0 +1,2 @@
+curl -v -X POST "https://haskmu-romefeller.c9users.io/serie" -d '{"nome":"The Walking Dead", "genero":"Terror", "qtTemp": 8, "ano": 2012}'
+curl -v -X GET "https://haskmu-romefeller.c9users.io/serie/1/consulta"

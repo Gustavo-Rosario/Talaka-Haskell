@@ -26,8 +26,12 @@
 /acompanhar/#SerieId/todosf                     ExpectadoresFR   GET
 -- Talaka Haskell
 
-/user/cadastrar                                 CadUserR        GET POST
+/usuario/cadastrar                              CadUserR        GET POST
 /projeto/cadastrar                              CadProjR        GET POST
 
 /perfil/#UserId                                 PerfilUserR     GET
 !/projeto/#ProjectId                            PerfilProjectR  GET
+
+/comentar/#ProjectId                            ComentarProjectR POST
+
+/talaka/admin/dash                              AdminLoginR      GET
