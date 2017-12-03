@@ -30,6 +30,10 @@ instance Yesod App where
     defaultLayout w = do
         p <- widgetToPageContent $ do
             w
+            addStylesheet $ StaticR css_materialize_css
+            addStylesheetRemote "https://fonts.googleapis.com/icon?family=Material+Icons"
+            addScript $ StaticR js_jquery_js
+            addScript $ StaticR js_materialize_js
             toWidget $ $(cassiusFile "templates/css/main.cassius")
         msgs <- getMessages
         withUrlRenderer [hamlet|

@@ -95,13 +95,6 @@ getHeadR texto = do
                     ERROU....
         |]
 
-getHomeR :: Handler Html
-getHomeR = do
-    defaultLayout $ do
-        addStylesheet $ StaticR css_bootstrap_css
-        toWidget $ $(cassiusFile "templates/home.cassius")
-        $(whamletFile "templates/home.hamlet")
-    
 getCorR :: Text -> Handler Html
 getCorR cor = do
     defaultLayout $ do

@@ -35,7 +35,7 @@ getPerfilProjectR :: ProjectId -> Handler Html
 getPerfilProjectR projectId = do
     projeto <- runDB $ get404 projectId
     usuario <- runDB $ get404 $ projectCreator projeto
-    comentarios <-runDB $ selectList [CommentProject ==. projectId] [Desc CommentDateTime]
+    comentarios <- runDB $ selectList [CommentProject ==. projectId] [Desc CommentDateTime]
     comenuser <- sequence $ map (\ x -> (runDB $ get404 $ commentUser . entityVal $ x) >>= \y -> return (entityVal x,y)) comentarios
     (widget, enctype) <- generateFormPost $ formComment projectId 
     defaultLayout $ do
@@ -61,3 +61,25 @@ getPerfilProjectR projectId = do
                         #{userName u}: #{commentComment c}
             
         |]
+-- Listar Projetos        
+getListProjR :: Handler Html
+getListProjR = do
+    projects <- runDB $ selectList [] [Desc ProjectDateBegin]
+    projcreator <- sequence $ map (\proj -> (runDB $ get404 $ projectCreator . entityVal $ proj) >>= \creator -> return (entityVal proj, creator, entityKey proj) ) projects
+    defaultLayout $ do
+        [whamlet|
+            <ul>
+                $forall (project, creator, idp) <- projcreator
+                    <li>
+                        Titulo: #{projectTitle project} | Data: #{show $ projectDateBegin project} | Autor: #{ userName creator}
+                        <button .btn .btn-primary >
+                            Ver Projeto
+                     
+        |]
+        
+
+postApagarProjR :: ProjectId -> Handler Html
+postApagarProjR projectId = do
+    _ <- runDB $ get404 projectId
+    runDB $ delete projectId
+    redirect ListProjR

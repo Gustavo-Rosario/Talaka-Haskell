@@ -4,19 +4,16 @@
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TypeFamilies #-}
-module Handler.Admin where
+module Handler.View where
 
 import Import
 import Text.Cassius
 import Database.Persist.Postgresql
-import Handler.Form
 
-getAdminR :: Handler Html
-getAdminR = do 
+getHomeR :: Handler Html
+getHomeR = do
     defaultLayout $ do
-        [whamlet|
-            <h1 .naruto>
-                Teste de Classe
-            <h2 #sasuke>
-                Teste de Id
-        |]
+        setTitle "Talaka - Plataforma de Financiamento para Quadrinhos"
+        addStylesheet $ StaticR css_bootstrap_css
+        $(whamletFile "templates/nav.hamlet")
+        $(whamletFile "templates/home.hamlet")
