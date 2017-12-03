@@ -11,7 +11,8 @@
 /perfil/#UserId                                 PerfilUserR     GET
 !/projeto/#ProjectId                            PerfilProjectR  GET
 
-
+-- Login
+/login                                          LoginR          GET
 
 /comentar/#ProjectId                            ComentarProjectR POST
 

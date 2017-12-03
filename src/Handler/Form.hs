@@ -37,3 +37,8 @@ formUser = renderDivs $ User
     <*> aopt hiddenField "Foto de Perfil: " Nothing
     <*> aopt hiddenField "Foto de Capa: " Nothing
     <*> areq dayField "Data de Nascimento: " Nothing
+-- LOGIN
+formLogin :: Form(Text, Text)
+formLogin = renderDivs $ (,)
+    <$> areq emailField "Email: " Nothing
+    <*> areq passwordField "Senha: " Nothing

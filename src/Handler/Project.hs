@@ -69,12 +69,11 @@ getListProjR = do
     defaultLayout $ do
         [whamlet|
             <ul>
-                $forall (project, creator, idp) <- projcreator
+                $forall (project, creator, projId) <- projcreator
                     <li>
                         Titulo: #{projectTitle project} | Data: #{show $ projectDateBegin project} | Autor: #{ userName creator}
-                        <button .btn .btn-primary >
+                        <a .btn .btn-primary href=@{ PerfilProjectR projId}>
                             Ver Projeto
-                     
         |]
         
 
