@@ -34,11 +34,13 @@ postCadUserR = do
 
 
 getPerfilUserR :: UserId -> Handler Html
+
 getPerfilUserR usuarioId = do
     usuario <- runDB $ get404 usuarioId
     defaultLayout $ do
+        setTitle "Talaka - Perfil de Usuário"
+        $(whamletFile "templates/home.hamlet")
         [whamlet|
-        
             <div .areah1>
                 <h1>
                     Nome: #{userName usuario}

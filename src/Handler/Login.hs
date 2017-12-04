@@ -52,6 +52,11 @@ isAuth :: Text -> Text -> HandlerT App IO (Maybe (Entity User)) -- Trocando a Mo
 isAuth login senha = runDB $ selectFirst [UserLogin ==. login, UserPwd ==. senha] []
 
 
+postLogoutR :: Handler Html
+postLogoutR = do
+    deleteSession "_USER"
+    redirect HomeR
+
 -- postLoginR :: Handler Html
 -- postLoginR = do
 --     ((res,_),_) <- runFormPost formLogin

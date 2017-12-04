@@ -5,3 +5,6 @@
     <li>
         <a href=@{CadProjR}>
             Cadastrar Projeto
+    <li>
+        <form action=@{LogoutR} method=post>
+            <input type="submit" value="Deslogar">

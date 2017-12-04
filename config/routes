@@ -13,6 +13,7 @@
 
 -- Login
 /login                                          LoginR          GET POST
+/logout                                         LogoutR         POST
 
 /comentar/#ProjectId                            ComentarProjectR POST
 

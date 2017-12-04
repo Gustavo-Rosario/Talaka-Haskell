@@ -14,6 +14,8 @@ import Handler.Form
 getAdminR :: Handler Html
 getAdminR = do 
     defaultLayout $ do
+        setTitle "Talaka - Perfil de Administrador"
+        $(whamletFile "templates/home.hamlet")
         [whamlet|
             <h1 .naruto>
                 Teste de Classe
