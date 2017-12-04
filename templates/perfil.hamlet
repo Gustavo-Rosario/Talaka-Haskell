@@ -1,14 +1,35 @@
-<div .areah1>
-    <img src=@{StaticR userImg } >
-    <img src=@{StaticR userCover } >
-    <h1>
-        Nome: #{userName user}
-    <h1>
-        Login: #{userLogin user}
-    <h1>
-        Data: #{show $ userDateBirth user}
+<div #headerUser>
+    <div #img style=background-image:url(@{StaticR userCover })>
+    <div #bg>
+    
+    <div #user>
+        <div .foto style=background-image:url(@{StaticR userImg })>
         
-        
-        
+        <div .infos>
+            <h1>
+                #{userName user}
+            <h2>
+                <i .material-icons>
+                    person
+                #{userLogin user}
+            <h3>
+                #{userEmail user}
+                
+                
+<div #contentUSer>
+    <div #bioUser>
+        <p>
+            #{show $ userBio user}
+        <p>
+            #{show $ userDateBirth user}
+    <div #menuUser>
+        <ul>
+            <li>
+                Projetos criados
+            <li>
+                Projetos Financiados
+                
+    
+    
         
         

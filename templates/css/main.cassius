@@ -1,4 +1,3 @@
-
 #bg
     background-image:url('static/img/bgmem.png')
     position:absolute
@@ -77,5 +76,127 @@
     
 #administrador:after
     content:"Administrador"
+    
+
+#headerUser
+    width:100%
+    height:275px
+    position:relative
+
+#headerUser #img
+    background-size:cover
+    background-position:center center
+    background-repeat:no-repeat 
+    width:100%
+    height:275px
+    position:relative
+    filter:blur(3px)
+
+#headerUser #bg
+    filter:blur(3px)
+    position:absolute
+    width:100%
+    height:100%
+    background-color:rgba(0,0,0,.5)
+    background: -moz-linear-gradient(top, rgba(165,2,73,0.5) 0%, rgba(19,105,161,0.5) 100%)
+    background: -webkit-linear-gradient(top, rgba(165,2,73,0.5) 0%,rgba(19,105,161,0.5) 100%)
+    background: linear-gradient(to bottom, rgba(165,2,73,0.5) 0%,rgba(19,105,161,0.5) 100%)
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40a50249', endColorstr='#401369a1',GradientType=0 )
+
+#user
+    width:80%
+    display:flex
+    margin:auto
+    margin-top: -110px
+    position: relative
+
+#user .foto, #user .infos
+    box-sizing:border-box
+    
+#user .foto
+    width:200px
+    height:200px
+    border-radius:50%
+    background-size:cover
+    background-position:center center
+    border: 3px solid #327DAD
+    box-shadow: 0 0 15px #327DAD
+    
+#user .infos
+    width:calc(100% - 200px)
+    height:150px
+    color:#fff
+    padding:2%;
+
+#user .infos h1, #user .infos h2, #user .infos h3
+    margin:0 0 5px 0
+    text-shadow:0 0 3px #fff
+
+#user .infos h1
+    font-size:22px
+    font-weight:500
+
+#user .infos h2
+    font-size:18px
+    font-weight:400
+
+#user .infos h2 i
+    font-size:13px
+
+#user .infos h3
+    font-size:14px
+    font-weight:400
+
+#contentUSer
+    width:80%
+    margin:0 auto 20px auto
+    display:flex
+
+#bioUser
+    width:200px
+    margin-top:60px
+    border:1px solid #e2e2e2
+    border-radius:4px
+    padding:2%
+    box-sizing:border-box
+#bioUser p
+    padding: 10px 0
+    border-bottom: 1px solid #EE84B3
+    display: block
+    
+#menuUser
+    width:calc(100% - 200px)
+    box-sizing:border-box
+
+#menuUser ul
+    margin:0
+    display:flex
+    
+#menuUser li
+    width: 50%
+    padding: 2%
+    border-bottom: 5px solid #fff
+    color: #1369A1
+    transition: .3s
+    text-align: center
+    cursor:pointer
+
+#menuUser li:hover
+    border-bottom: 5px solid #1369A1
+    
 
 
+footer
+    width:100%
+    background-color:#A50249
+    color:#fff
+footer ul
+    display:flex
+    justify-content:space-around
+footer li
+    padding:1% 0 0 0
+footer p
+    padding:1% 0 0 0
+    text-align:center
+    margin:0
+    border-top:1px solid rgba(255,255,255,.3)

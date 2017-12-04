@@ -74,3 +74,4 @@ getPerfilUserR userid = do
         setTitle "Talaka Pocket - Perfil de Usuário"
         $(whamletFile "templates/home.hamlet")
         $(whamletFile "templates/perfil.hamlet")
+        $(whamletFile "templates/footer.hamlet")
