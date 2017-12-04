@@ -1,0 +1,31 @@
+<div #explore>
+    <i .material-icons>
+        chat
+    <h1>
+        Explore campanhas no Talaka
+    <h2>
+        Conheça os incríveis projetos criados pelos quadrinistas nacionais
+
+<ul .listaProjetos>
+    $forall (project, creator, projId) <- projcreator
+        <li>
+            <div .cadaFoto>
+            <h3>
+                #{projectTitle project} 
+            <h4>
+                #{ userName creator}
+            <p>
+                #{projectDescription project}
+            
+                <div .footer>
+                    <p .metas>
+                        <span .metaAtual>
+                            Valor acumulado <br>
+                            R$ #{projectCollected project}
+                        <span .metaFinal>
+                            Meta Final <br>
+                            R$ #{projectMeta project}    
+                    <a .btn .btn-primary href=@{ PerfilProjectR projId} .linkProjeto>
+                        <i .material-icons>
+                            remove_red_eye
+                        Ver Projeto

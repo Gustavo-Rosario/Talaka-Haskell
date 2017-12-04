@@ -21,7 +21,7 @@
         <p>
             #{unTextarea $ fromJust(userBio user)}
         <p>
-            #{dateFormat $ show $ userDateBirth user}
+            #{dateFormatMonth $ show $ userDateBirth user}
     <div #menuUser>
         <ul>
             <li>

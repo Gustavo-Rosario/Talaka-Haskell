@@ -280,3 +280,84 @@ footer p
 
 #loginFull #signin form label
     color:#fff
+
+#explore
+    width:100%
+    height:200px
+    background-color:#A50249
+    background-size:cover
+    background-position:center center
+    text-align:center
+    display:flex
+    flex-direction:column
+    justify-content:center
+    color:#fff
+#explore i
+    font-size:3.5rem
+#explore h1
+    margin:5px 0
+    font-size:25px
+#explore h2
+    margin:5px 0
+    font-size:16px
+
+.listaProjetos 
+    display:flex
+    width:85%
+    margin:auto
+    flex-wrap: wrap;
+    position:relative
+    
+.listaProjetos li
+    width:30%
+    margin:1.5%
+    box-sizing:border-box
+    border:1px solid #c2c2c2
+    padding:1%
+    height:450px
+    position:relative
+    
+.listaProjetos h3
+    color:#A50249
+    font-weight:500
+    margin:5px 0
+    font-size:16px
+.listaProjetos h4
+    color:#5e5e5e
+    margin:3px 0
+    font-size:12px
+.listaProjetos p
+    font-size:13px
+    color:#3e3e3e
+.listaProjetos .cadaFoto
+    width:100%
+    height:230px
+    background-color:#1369A1
+    background-size:cover
+    background-position:center center
+    background-repeat:no-repeat
+div.footer 
+    position:absolute
+    bottom:0
+    left:0
+    width:100%
+div.footer .metas
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    padding: 3%;
+    text-align: left;
+div.footer .metas .metaAtual
+    color:#3A0E85
+div.footer .metas .metaFinal
+    color:#A50249
+.linkProjeto
+    margin:10px auto
+    display: block
+    width: 50%
+.linkProjeto i
+    font-size:13px
+    
+    
+    

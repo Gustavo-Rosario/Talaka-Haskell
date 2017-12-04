@@ -7,11 +7,6 @@
                 
     <div #menu>
         <ul>
-            <a href=@{CadUserR}>
-                <li #cadastrarUsuario>
-                    <i .material-icons>
-                        person_add
-                        
             <a href=@{ListProjR}>
                 <li #listarProjetos>
                     <i .material-icons>

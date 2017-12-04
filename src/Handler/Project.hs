@@ -84,14 +84,9 @@ getListProjR = do
     projects <- runDB $ selectList [] [Desc ProjectDateBegin]
     projcreator <- sequence $ map (\proj -> (runDB $ get404 $ projectCreator . entityVal $ proj) >>= \creator -> return (entityVal proj, creator, entityKey proj) ) projects
     defaultLayout $ do
-        [whamlet|
-            <ul>
-                $forall (project, creator, projId) <- projcreator
-                    <li>
-                        Titulo: #{projectTitle project} | Data: #{show $ projectDateBegin project} | Autor: #{ userName creator}
-                        <a .btn .btn-primary href=@{ PerfilProjectR projId}>
-                            Ver Projeto
-        |]
+        setTitle "Talaka Pocket - Lista de Projetos"
+        $(whamletFile "templates/listaprojetos.hamlet")
+        $(whamletFile "templates/footer.hamlet")
         
 
 postApagarProjR :: ProjectId -> Handler Html
