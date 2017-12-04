@@ -26,7 +26,7 @@ formProject = renderDivs $ Project
     <*> fmap utctDay (lift $ liftIO getCurrentTime) -- faz um IO funcionar em outra Monad
     <*> areq dayField "Prazo Final: " Nothing
     <*> pure (toSqlKey 1)
-    
+-- CadUser   
 formUser :: Form User
 formUser = renderDivs $ User
     <$> areq textField "Nome do usuário: " Nothing
@@ -34,9 +34,21 @@ formUser = renderDivs $ User
     <*> areq emailField "Email: " Nothing
     <*> areq passwordField "Senha: " Nothing
     <*> aopt textareaField "Biografia: " Nothing
-    <*> aopt hiddenField "Foto de Perfil: " Nothing
-    <*> aopt hiddenField "Foto de Capa: " Nothing
+    <*> aopt hiddenField "" Nothing
+    <*> aopt hiddenField "" Nothing
     <*> areq dayField "Data de Nascimento: " Nothing
+formImgs :: Form (FileInfo, FileInfo)    
+formImgs = renderDivs $ (,) 
+    <$> areq fileField FieldSettings{fsId=Just "hident1",
+                                    fsLabel="Foto de Perfil: ",
+                                    fsTooltip= Nothing,
+                                    fsName= Nothing,
+                                    fsAttrs=[("accept","image/*")]} Nothing
+    <*> areq fileField FieldSettings{fsId=Just "hident1",
+                                    fsLabel="Foto de Capa: ",
+                                    fsTooltip= Nothing,
+                                    fsName= Nothing,
+                                    fsAttrs=[("accept","image/*")]} Nothing
 -- LOGIN
 formLogin :: Form(Text, Text)
 formLogin = renderDivs $ (,)

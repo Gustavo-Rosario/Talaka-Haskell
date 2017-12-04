@@ -3,6 +3,7 @@
 -- Talaka Haskell
 /                                               HomeR           GET
 /usuario/cadastrar                              CadUserR        GET POST
+/usuario/cadastrar/#UserId/imagens              CadUserImgsR    GET POST
 /projeto/cadastrar                              CadProjR        GET POST
 
 -- Projeto

@@ -15,38 +15,57 @@ getCadUserR :: Handler Html
 getCadUserR = do
     (widget, enctype) <- generateFormPost formUser
     defaultLayout $ do
-        [whamlet|
-            <h1>
-                Cadastro de Usuario
-            <form action=@{CadUserR} method=post enctype=#{enctype}>
-                ^{widget}
-                <input type="submit" value="Cadastrar Usuário">
-        |]
+        setTitle "Talaka Pocket - Cadastro de Usuário"
+        $(whamletFile "templates/nav.hamlet")
+        $(whamletFile "templates/caduser.hamlet")
 
 postCadUserR :: Handler Html
 postCadUserR = do
     ((result,_),_) <- runFormPost formUser
     case result of
         FormSuccess user -> do
-            runDB $ insert user
-            redirect CadUserR
+            userid <- runDB $ insert user
+            redirect (CadUserImgsR userid)
         _ -> redirect HomeR
+        
+getCadUserImgsR :: UserId -> Handler Html
+getCadUserImgsR userid = do
+    (widget, enctype) <- generateFormPost formImgs
+    defaultLayout $ do
+        setTitle "Talaka Pocket - Imagens Perfil"
+        $(whamletFile "templates/nav.hamlet")
+        $(whamletFile "templates/img.hamlet")
+        
+postCadUserImgsR :: UserId -> Handler Html
+postCadUserImgsR userid = do
+    _ <- runDB $ get404 userid
+    ((result,_),_) <- runFormPost formImgs
+    case result of
+        FormSuccess (perfil, cover) -> do
+            liftIO $ fileMove perfil ("static/img/users" ++ (unpack $ fileName perfil))
+            liftIO $ fileMove cover ("static/img/covers" ++ (unpack $ fileName cover))
+            runDB $ update userid [UserImg =. (Just (fileName perfil)), UserCover =. (Just (fileName cover))]
+            (User name login email _ bio img cover date) <- runDB $ get404 userid
+            setSession "_USER" (pack(show $ User name login email "" bio img cover date))
+            setSession "_USERID" (pack(show userid))
+            redirect (PerfilUserR userid) 
+        _ -> do
+            setMessage [shamlet|
+                <h1>
+                    Problema em imagens
+            |]
+            redirect (CadUserImgsR userid)
 
+-- patchAlterarNomeR :: SerieId -> Text -> Handler Value
+-- patchAlterarNomeR serieid nome = do
+--     _ <- runDB $ get404 serieid
+--     runDB $ update serieid [SerieNome =. nome]
+--     sendStatusJSON noContent204 (object ["resp" .= serieid])
 
 getPerfilUserR :: UserId -> Handler Html
-
-getPerfilUserR usuarioId = do
-    usuario <- runDB $ get404 usuarioId
+getPerfilUserR userid = do
+    usuario <- runDB $ get404 userid
     defaultLayout $ do
-        setTitle "Talaka - Perfil de Usuário"
+        setTitle "Talaka Pocket - Perfil de Usuário"
         $(whamletFile "templates/home.hamlet")
-        [whamlet|
-            <div .areah1>
-                <h1>
-                    Nome: #{userName usuario}
-                    
-            <h1>
-                Login: #{userLogin usuario}
-            <h1>
-                Data: #{show $ userDateBirth usuario}
-        |]
+        $(whamletFile "templates/perfil.hamlet")

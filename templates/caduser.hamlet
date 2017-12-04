@@ -1,0 +1,5 @@
+<h1>
+    Cadastro de Usuario
+<form action=@{CadUserR} method=post enctype=#{enctype}>
+    ^{widget}
+    <input type=submit value=Cadastrar Usuário>

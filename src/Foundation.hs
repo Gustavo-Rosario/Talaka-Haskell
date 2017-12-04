@@ -51,6 +51,10 @@ instance Yesod App where
     authRoute _ = Just LoginR
     isAuthorized HomeR _ = return Authorized
     isAuthorized LoginR _ = return Authorized
+    isAuthorized (PerfilUserR _) _ = return Authorized
+    isAuthorized (PerfilProjectR _) _ = return Authorized
+    isAuthorized CadUserR _ = return Authorized
+    isAuthorized (CadUserImgsR _) _ = return Authorized
     isAuthorized (StaticR _) _ = return Authorized
     isAuthorized AdminR _ = isAdmin
     isAuthorized _ _ = isUser
