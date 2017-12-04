@@ -11,6 +11,7 @@ import Text.Cassius
 import Database.Persist.Postgresql
 import Handler.Form
 import Data.Maybe
+import Handler.Utils
 
 getCadUserR :: Handler Html
 getCadUserR = do

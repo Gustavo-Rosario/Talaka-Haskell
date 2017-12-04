@@ -1,3 +1,20 @@
-<form action=@{LoginR} method=post enctype=#{enctype}>
+<div #loginFull>
+    <div id="signup">
+        <div .register>
+            <h1>
+                Bem-Vindo!
+            <h2>
+                Crie uma conta Talaka aqui.
+            <p>
+                Cadastre-se na MAIOR plataforma de crowdfunding de quadrinhos do país e contribua para que diversos projetos virem realidade. Caso você seja um artista independente que deseja ter seu projeto financiado, basta se cadastrar no Talaka e criar a sua campanha na plataforma. Assim ela poderá ser vista por diversas pessoas que irão se interessar e apoiar o seu sonho.
+            <a href=@{CadUserR} .botao .principal>
+                REGISTRAR 
+            <a href=@{HomeR} .botao .alternativo>
+                VOLTAR
+
+
+    <div id="signin">
+        <div .login>
+            <form action=@{LoginR} method=post enctype=#{enctype}>
                 ^{widget}
-                <input type=submit value=Logar>
+                <input type=submit value=Logar .botao .principalAlt>

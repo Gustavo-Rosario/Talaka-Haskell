@@ -32,6 +32,7 @@ instance Yesod App where
             w
             addStylesheet $ StaticR css_materialize_css
             addStylesheetRemote "https://fonts.googleapis.com/css?family=Courgette"
+            addStylesheetRemote "https://fonts.googleapis.com/css?family=Dosis:400,500,700"
             addStylesheetRemote "https://fonts.googleapis.com/icon?family=Material+Icons"
             addScript $ StaticR js_jquery_js
             addScript $ StaticR js_materialize_js

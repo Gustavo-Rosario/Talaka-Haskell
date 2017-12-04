@@ -19,13 +19,13 @@
 <div #contentUSer>
     <div #bioUser>
         <p>
-            #{show $ userBio user}
+            #{unTextarea $ fromJust(userBio user)}
         <p>
-            #{show $ userDateBirth user}
+            #{dateFormat $ show $ userDateBirth user}
     <div #menuUser>
         <ul>
             <li>
-                Projetos criados
+                Projetos Criados
             <li>
                 Projetos Financiados
                 
