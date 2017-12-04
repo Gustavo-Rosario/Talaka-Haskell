@@ -28,11 +28,10 @@ User json
     dateBirth       Day
     deriving Show
     
-Adm json
+Admin json
     name            Text
     login           Text
     pwd             Text
-    img             Text
     deriving Show
     
 Project json 

@@ -40,5 +40,5 @@ formUser = renderDivs $ User
 -- LOGIN
 formLogin :: Form(Text, Text)
 formLogin = renderDivs $ (,)
-    <$> areq emailField "Email: " Nothing
+    <$> areq textField "Email: " Nothing
     <*> areq passwordField "Senha: " Nothing

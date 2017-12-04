@@ -12,7 +12,7 @@
 !/projeto/#ProjectId                            PerfilProjectR  GET
 
 -- Login
-/login                                          LoginR          GET
+/login                                          LoginR          GET POST
 
 /comentar/#ProjectId                            ComentarProjectR POST
 
