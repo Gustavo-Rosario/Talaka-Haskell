@@ -1,0 +1,32 @@
+<div #bg>
+    <div #pocket>
+        <h1>
+            PROJETO
+            <b>
+                talaka ◆ pocket
+                
+    <div #menu>
+        <ul>
+            <a href=@{CadUserR}>
+                <li #cadastrarUsuario>
+                    <i .material-icons>
+                        person_add
+                        
+            <a href=@{ListProjR}>
+                <li #listarProjetos>
+                    <i .material-icons>
+                        list
+                    
+            <li #buscarProjetos>
+                <i .material-icons>
+                    search
+                        
+            <a href=@{LoginR}>
+                <li #login>
+                    <i .material-icons>
+                        screen_lock_landscape
+            
+            <a href=@{AdminR}>
+                <li #administrador>
+                    <i .material-icons>
+                        person_pin

@@ -17,15 +17,30 @@ formComment pId = renderDivs $ Comment
     <*> lift( liftIO getCurrentTime)
     <*> areq hiddenField "" (Just 0)
 
-formProject :: Form Project
-formProject = renderDivs $ Project
+formProject :: UserId -> Form Project
+formProject userid = renderDivs $ Project
     <$> areq textField "Título: " Nothing
     <*> areq textField "Descrição: " Nothing
     <*> areq intField "Meta: " Nothing
     <*> areq hiddenField "" (Just 0)
     <*> fmap utctDay (lift $ liftIO getCurrentTime) -- faz um IO funcionar em outra Monad
     <*> areq dayField "Prazo Final: " Nothing
-    <*> pure (toSqlKey 1)
+    <*> pure userid
+    <*> aopt hiddenField "" Nothing
+    <*> aopt hiddenField "" Nothing
+    
+formProjectImg :: Form (FileInfo, FileInfo)
+formProjectImg = renderDivs $ (,)
+    <$> areq fileField FieldSettings{fsId=Just "hident1",
+                                    fsLabel="Foto de Destaque: ",
+                                    fsTooltip= Nothing,
+                                    fsName= Nothing,
+                                    fsAttrs=[("accept","image/*")]} Nothing
+    <*> areq fileField FieldSettings{fsId=Just "hident1",
+                                    fsLabel="Foto de Capa: ",
+                                    fsTooltip= Nothing,
+                                    fsName= Nothing,
+                                    fsAttrs=[("accept","image/*")]} Nothing
 -- CadUser   
 formUser :: Form User
 formUser = renderDivs $ User

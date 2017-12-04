@@ -10,57 +10,74 @@ import Import
 import Text.Cassius
 import Database.Persist.Postgresql
 import Handler.Form
+import Data.Maybe
+import qualified Prelude as P
 
 getCadProjR :: Handler Html
-getCadProjR = do
-    (widget, enctype) <- generateFormPost formProject
-    defaultLayout $ do
-        [whamlet|
-            <h1>
-                Cadastro de Projeto
-            <form action=@{CadProjR} method=post enctype=#{enctype}>
-                ^{widget}
-                <input type="submit" value="ALOO">
-        |]
+getCadProjR = undefined
+-- do
+--     session <- lookupSession "_USERID"
+--     mUserId <- return $ fmap (P.read . unpack) session :: Handler (Maybe UserId)
+--     userId <- fromJust(mUserId)
+--     (widget, enctype) <- generateFormPost (formProject userId)
+--     defaultLayout $ do
+--         setTitle "Talaka Pocket - Cadastro Projeto"
+--         $(whamletFile "templates/nav.hamlet")
+--         $(whamletFile "templates/cadproj.hamlet")
+        
 postCadProjR :: Handler Html
-postCadProjR = do
-    ((result,_),_) <- runFormPost formProject
+postCadProjR = undefined 
+-- do
+--     session <- lookupSession "_USERID"
+--     mUserId <- return $ fmap (P.read . unpack) session :: Handler (Maybe UserId)
+--     userId <- fromJust(mUserId)
+--     ((result,_),_) <- runFormPost (formProject userId) 
+--     case result of
+--         FormSuccess project -> do
+--             projectid <- runDB $ insert project
+--             redirect (CadProjImgsR projectid)
+--         _ -> redirect HomeR 
+
+getCadProjImgsR :: ProjectId -> Handler Html
+getCadProjImgsR projectid = do 
+    (widget, enctype) <- generateFormPost formProjectImg
+    defaultLayout $ do
+        setTitle "Talaka Pocket - Imagens do Projeto"
+        $(whamletFile "templates/nav.hamlet")
+        $(whamletFile "templates/projImg.hamlet")
+        
+postCadProjImgsR :: ProjectId -> Handler Html
+postCadProjImgsR projectid = do
+    _ <- runDB $ get404 projectid
+    ((result,_),_) <- runFormPost formProjectImg
     case result of
-        FormSuccess project -> do
-            runDB $ insert project
-            redirect CadProjR
-        _ -> redirect HomeR        
+        FormSuccess (destaque, cover) -> do
+            liftIO $ fileMove destaque ("static/" ++ (unpack $ fileName destaque))
+            liftIO $ fileMove cover ("static/" ++ (unpack $ fileName cover))
+            runDB $ update projectid [ProjectDes =. (Just (fileName destaque)), ProjectCover =. (Just (fileName cover))]
+            redirect (PerfilProjectR projectid) 
+        _ -> do
+            setMessage [shamlet|
+                <h1>
+                    Problema em imagens
+            |]
+            redirect (CadProjImgsR projectid)
         
 getPerfilProjectR :: ProjectId -> Handler Html
 getPerfilProjectR projectId = do
     projeto <- runDB $ get404 projectId
     usuario <- runDB $ get404 $ projectCreator projeto
+    userImg <- return $ StaticRoute ["img", fromJust(userImg usuario)] []
+    projetoDes <- return $ StaticRoute ["img", fromJust(projectDes projeto )] []
+    projetoCover <- return $ StaticRoute ["img", fromJust(projectCover projeto)] []
     comentarios <- runDB $ selectList [CommentProject ==. projectId] [Desc CommentDateTime]
     comenuser <- sequence $ map (\ x -> (runDB $ get404 $ commentUser . entityVal $ x) >>= \y -> return (entityVal x,y)) comentarios
     (widget, enctype) <- generateFormPost $ formComment projectId 
     defaultLayout $ do
-        [whamlet|
-            <h1>
-                Nome: #{projectTitle projeto}
-            <h2>
-                Criador: #{userName usuario}
-            <h2>
-                Data: #{show $ projectDateBegin projeto}
-            <h2>
-                Meta: #{projectMeta projeto}
-            
-            <form action=@{ComentarProjectR projectId} method=post enctype=#{enctype}>
-                ^{widget}
-                <input type="submit" value="Comentar">
-                
-            <h3>
-                Comentários: 
-            <ul>
-                $forall (c, u) <- comenuser
-                    <li>
-                        #{userName u}: #{commentComment c}
-            
-        |]
+        setTitle "Talaka Pocket - Página de Campanha"
+        $(whamletFile "templates/home.hamlet")
+        $(whamletFile "templates/project.hamlet")
+        
 -- Listar Projetos        
 getListProjR :: Handler Html
 getListProjR = do
@@ -82,3 +99,6 @@ postApagarProjR projectId = do
     _ <- runDB $ get404 projectId
     runDB $ delete projectId
     redirect ListProjR
+    
+-- getby
+-- <-. maybe like

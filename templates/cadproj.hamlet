@@ -1,0 +1,5 @@
+<h1>
+    Cadastro de Projeto
+<form action=@{CadProjR} method=post enctype=#{enctype}>
+    ^{widget}
+    <input type="submit" value="ALOO">

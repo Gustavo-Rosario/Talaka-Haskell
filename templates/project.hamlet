@@ -1,0 +1,21 @@
+<img src=@{StaticR projetoDes}>
+<img src=@{StaticR projetoCover}>
+
+<h1>
+    Nome: #{projectTitle projeto}
+<h2>
+    Criador: #{userName usuario}
+<h2>
+    Data: #{show $ projectDateBegin projeto}
+<h2>
+    Meta: #{projectMeta projeto}
+
+<form action=@{ComentarProjectR projectId} method=post enctype=#{enctype}>
+    ^{widget}
+    <input type=submit value=Comentar>
+<h3>
+    Comentários: 
+<ul>
+    $forall (c, u) <- comenuser
+        <li>
+            #{userName u}: #{commentComment c}

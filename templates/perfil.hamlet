@@ -1,5 +1,4 @@
 <div .areah1>
-    
     <img src=@{StaticR userImg } >
     <img src=@{StaticR userCover } >
     <h1>

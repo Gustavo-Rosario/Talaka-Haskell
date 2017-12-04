@@ -4,9 +4,11 @@
 /                                               HomeR           GET
 /usuario/cadastrar                              CadUserR        GET POST
 /usuario/cadastrar/#UserId/imagens              CadUserImgsR    GET POST
-/projeto/cadastrar                              CadProjR        GET POST
+
 
 -- Projeto
+/projeto/cadastrar                              CadProjR        GET POST
+/projeto/cadastrar/#ProjectId/imagens           CadProjImgsR    GET POST
 /projeto/lista                                  ListProjR       GET
 /projeto/#ProjectId/apagar                      ApagarProjR     POST
 /perfil/#UserId                                 PerfilUserR     GET

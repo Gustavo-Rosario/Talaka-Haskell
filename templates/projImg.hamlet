@@ -1,0 +1,5 @@
+<h1>
+    Upar imagens
+<form action=@{CadProjImgsR projectid} method=post enctype=#{enctype}>
+    ^{widget}
+    <input type=submit value=Inserir fotos>

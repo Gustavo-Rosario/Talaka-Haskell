@@ -42,6 +42,8 @@ Project json
     dateBegin       Day -- yyyy-mm-dd
     dateEnd         Day
     creator         UserId
+    des             Text Maybe
+    cover           Text Maybe
     deriving Show
 
 
