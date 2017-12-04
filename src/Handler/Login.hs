@@ -54,7 +54,13 @@ isAuth login senha = runDB $ selectFirst [UserLogin ==. login, UserPwd ==. senha
 
 postLogoutR :: Handler Html
 postLogoutR = do
-    deleteSession "_USER"
+    session <- lookupSession "_USERID"
+    case session of
+        Just _ -> do
+            deleteSession "_USER"
+            deleteSession "_USERID"
+        Nothing -> do
+            deleteSession "_ADMIN"
     redirect HomeR
 
 -- postLoginR :: Handler Html

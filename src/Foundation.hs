@@ -45,9 +45,43 @@ instance Yesod App where
                     ^{pageHead p}
                 <body>
                     $forall (status, msg) <- msgs
-                        <p class="message #{status}">#{msg}
+                        <p .message .#{status}>#{msg}>
                     ^{pageBody p}
-            |]
+        |]
+    authRoute _ = Just LoginR
+    isAuthorized HomeR _ = return Authorized
+    isAuthorized LoginR _ = return Authorized
+    isAuthorized (StaticR _) _ = return Authorized
+    isAuthorized AdminR _ = isAdmin
+    isAuthorized _ _ = isUser
+
+isUser :: Handler AuthResult
+isUser = do 
+    session <- lookupSession "_USER"
+    case session of 
+        Nothing -> do
+            admin <- lookupSession "_ADMIN"
+            case admin of
+                Nothing -> return AuthenticationRequired
+                Just _ -> return Authorized
+        Just _ -> return Authorized
+
+isAdmin :: Handler AuthResult
+isAdmin = do 
+    session <- lookupSession "_ADMIN"
+    case session of 
+        Nothing -> return AuthenticationRequired
+        Just _ -> return Authorized
+
+
+-- instance YesodBreadcrumbs App where
+--     breadcrumb HomeR = return ("Home", Nothing)
+--     breadcrumb RootR = return ("Root", Just HomeR)
+--     breadcrumb (NLR NLRootR) = return ("NL", Just RootR)
+--     breadcrumb (UKR UKRootR) = return ("UK", Just RootR)
+--     breadcrumb (BRR BRRootR) = return ("BR", Just RootR)
+
+            
 
 instance YesodPersist App where
     type YesodPersistBackend App = SqlBackend
