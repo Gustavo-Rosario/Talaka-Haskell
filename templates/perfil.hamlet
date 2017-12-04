@@ -1,8 +1,15 @@
 <div .areah1>
-            <h1>
-                Nome: #{userName usuario}
-                    
-            <h1>
-                Login: #{userLogin usuario}
-            <h1>
-                Data: #{show $ userDateBirth usuario}
+    
+    <img src=@{StaticR userImg } >
+    <img src=@{StaticR userCover } >
+    <h1>
+        Nome: #{userName user}
+    <h1>
+        Login: #{userLogin user}
+    <h1>
+        Data: #{show $ userDateBirth user}
+        
+        
+        
+        
+        
