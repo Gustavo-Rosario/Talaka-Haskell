@@ -9,6 +9,7 @@ module Handler.Utils where
 import Import
 import Data.Maybe
 import Data.Time
+import Database.Persist.Postgresql
 import qualified Prelude as P
 
 
@@ -32,6 +33,13 @@ dateFormatMonth (y1:y2:y3:y4:_:'1':'2':_:d1:d2:[]) = [d1,d2]++" de Dezembro de "
 getImgStatic :: [Text] -> Text -> Route Static
 getImgStatic path fileName = StaticRoute (path++[fileName]) []
 
-
-
-
+isLogged :: Handler (Maybe Int)
+isLogged = do 
+    session <- lookupSession "_USER"
+    case session of 
+        Nothing -> do
+            admin <- lookupSession "_ADMIN"
+            case admin of
+                Nothing -> return Nothing
+                Just _ -> return (Just 2)
+        Just _ -> return (Just 1)

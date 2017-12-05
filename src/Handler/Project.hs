@@ -49,8 +49,9 @@ postCadProjImgsR projectid = do
     ((result,_),_) <- runFormPost formProjectImg
     case result of
         FormSuccess (destaque, cover) -> do
-            liftIO $ fileMove destaque ("static/proj/" ++ (unpack $ fileName destaque))
-            liftIO $ fileMove cover ("static/proj/" ++ (unpack $ fileName cover))
+            --liftIO $ fileMove perfil ("static/img/users/" ++ (unpack $ fileName perfil))
+            liftIO $ fileMove destaque ("static/img/proj/" ++ (unpack $ fileName destaque))
+            liftIO $ fileMove cover ("static/img/proj/" ++ (unpack $ fileName cover))
             runDB $ update projectid [ProjectDes =. (Just (fileName destaque)), ProjectCover =. (Just (fileName cover))]
             redirect (PerfilProjectR projectid) 
         _ -> do

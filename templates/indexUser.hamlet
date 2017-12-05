@@ -11,9 +11,13 @@
                 <li #buscarProjetos>
                     <i .material-icons>
                         search
-            <a href=@{LoginR}>
+            <a href=@{PerfilUserR (toSqlKey 1)}>
                 <li #login>
                     <i .material-icons>
-                        screen_lock_landscape
-            
+                        person
+            <li #logout>
+                <form action=@{LogoutR} method=post >
+                    <button type=submit>
+                        <i .material-icons>
+                            power_settings_new
            

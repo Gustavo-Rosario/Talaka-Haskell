@@ -76,3 +76,4 @@ formSearch :: Form(Text, Text)
 formSearch = renderDivs $ (,)
     <$> areq textField "Busca" Nothing
     <*> areq hiddenField "" (Just "alo")
+

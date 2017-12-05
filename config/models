@@ -23,8 +23,8 @@ User json
     email           Text
     pwd             Text
     bio             Textarea Maybe
-    img             Text Maybe
-    cover           Text Maybe
+    img             Text Maybe default='perfil.jpg'
+    cover           Text Maybe default='cover.jpg'
     dateBirth       Day
     deriving Show
     
@@ -42,8 +42,8 @@ Project json
     dateBegin       Day -- yyyy-mm-dd
     dateEnd         Day
     creator         UserId
-    des             Text Maybe
-    cover           Text Maybe
+    des             Text Maybe default='capaProjeto.jpg'
+    cover           Text Maybe default='fundoprojeto.jpg'
     approved        Int default=0
     deriving Show
 

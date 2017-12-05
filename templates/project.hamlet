@@ -1,29 +1,50 @@
 <div #fundoProjeto>
-    <div #coverProjeto>
+    <div #financiamento>
+        <h1>
+            Apoie o projeto!
+        <h2>
+            Doe dinheiro para tirar essa ideia do papel
+        <p>
+            Nós do Talaka Pocket queremos que todos os projetos sejam incríveis e, para isto, precisamos do apoio de cada um dos usuários!
+        <a href=@{HomeR} .botao .principal>
+            Financiar
+        <a href=@{HomeR} .botao .cancelar>
+            Cancelar
+            
+    <div #coverProjeto style="background-image:url(@{StaticR projetoCover})">
     <div #bgPreto>
+    <a href=@{HomeR}>
+        <div #voltar>
+            <i .material-icons>
+                arrow_back
     <div #informacoesProjeto>
-    
-        
-
-
-<img src=@{StaticR projetoDes}>
-<img src=@{StaticR projetoCover}>
-
-<h1>
-    Nome: #{projectTitle projeto}
-<h2>
-    Criador: #{userName usuario}
-<h2>
-    Data: #{show $ projectDateBegin projeto}
-<h2>
-    Meta: #{projectMeta projeto}
-
-<form action=@{ComentarProjectR projectId} method=post enctype=#{enctype}>
-    ^{widget}
-    <input type=submit value=Comentar>
-<h3>
-    Comentários: 
-<ul>
-    $forall (c, u) <- comenuser
-        <li>
-            #{userName u}: #{commentComment c}
+        <div #destaqueProjeto>
+            <div #destaqueProjetoImg style="background-image:url(@{StaticR projetoDes})">
+        <div #textoProjeto>
+            <h1>
+                #{projectTitle projeto}
+            <h2>
+                <span>
+                    #{userName usuario}
+                <span>
+                    #{show $ projectDateBegin projeto}
+                <span>
+                    R$ #{projectMeta projeto}
+            <p>
+                #{projectDescription projeto}
+            <div .acoes>
+                <a href=@{HomeR} .botao .principal>
+                    Financiar
+                <a href=@{HomeR} .botao .alternativo>
+                    Comentar
+<div #comentarioArea>
+    <form action=@{ComentarProjectR projectId} method=post enctype=#{enctype}>
+        ^{widget}
+        <input type=submit value=Comentar>
+    <h3>
+        Comentários: 
+    <ul>
+        $forall (c, u) <- comenuser
+            <li>
+                #{userName u}: #{commentComment c}
+                
