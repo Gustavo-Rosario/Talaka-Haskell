@@ -30,27 +30,29 @@
                 Projetos Financiados
         <div #financiado>
             <ul .listaProjetos>
-                <li>
-                    <div .cadaFoto>
-                    <h3>
-                        titulo do projeto
-                    <h4>
-                        nome do usuario
-                    <p>
-                        descricao do projeto
-                    
-                        <div .footer>
-                            <p .metas>
-                                <span .metaAtual>
-                                    Valor acumulado <br>
-                                    R$ 000
-                                <span .metaFinal>
-                                    Meta Final <br>
-                                    R$ 000
-                            <a .btn .btn-primary  .linkProjeto>
-                                <i .material-icons>
-                                    remove_red_eye
-                                Ver Projeto
+                
+                $forall (Entity projId project) <- userProjs
+                    <li>
+                        <div .cadaFoto style=background-image:url(@{StaticR (getImgStatic ["img","proj"] ( fromJust $ projectDes project)) }>
+                        <h3>
+                            #{projectTitle project}
+                        <h4>
+                            #{userName user}
+                        <p>
+                            #{projectDescription project}
+                        
+                            <div .footer>
+                                <p .metas>
+                                    <span .metaAtual>
+                                        Valor acumulado <br>
+                                        R$ #{projectCollected project}
+                                    <span .metaFinal>
+                                        Meta Final <br>
+                                        R$ #{projectMeta project}
+                                <a .btn .btn-primary  .linkProjeto>
+                                    <i .material-icons>
+                                        remove_red_eye
+                                    Ver Projeto
         
         <div #apoiado>
             <ul .listaProjetos>

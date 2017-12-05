@@ -11,32 +11,29 @@ import Text.Cassius
 import Database.Persist.Postgresql
 import Handler.Form
 import Data.Maybe
+import Handler.Utils
 import qualified Prelude as P
 
 getCadProjR :: Handler Html
-getCadProjR = undefined
--- do
---     session <- lookupSession "_USERID"
---     mUserId <- return $ fmap (P.read . unpack) session :: Handler (Maybe UserId)
---     userId <- fromJust(mUserId)
---     (widget, enctype) <- generateFormPost (formProject userId)
---     defaultLayout $ do
---         setTitle "Talaka Pocket - Cadastro Projeto"
---         $(whamletFile "templates/nav.hamlet")
---         $(whamletFile "templates/cadproj.hamlet")
+getCadProjR = do
+    (Just user) <- lookupSession "_USERID"
+    Just (Entity userId _) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ user) ] []
+    (widget, enctype) <- generateFormPost (formProject userId)
+    defaultLayout $ do
+        setTitle "Talaka Pocket - Cadastro Projeto"
+        $(whamletFile "templates/nav.hamlet")
+        $(whamletFile "templates/cadproj.hamlet")
         
 postCadProjR :: Handler Html
-postCadProjR = undefined 
--- do
---     session <- lookupSession "_USERID"
---     mUserId <- return $ fmap (P.read . unpack) session :: Handler (Maybe UserId)
---     userId <- fromJust(mUserId)
---     ((result,_),_) <- runFormPost (formProject userId) 
---     case result of
---         FormSuccess project -> do
---             projectid <- runDB $ insert project
---             redirect (CadProjImgsR projectid)
---         _ -> redirect HomeR 
+postCadProjR = do
+    (Just user) <- lookupSession "_USERID"
+    Just (Entity userId _) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ user) ] []
+    ((result,_),_) <- runFormPost (formProject userId) 
+    case result of
+        FormSuccess project -> do
+            projectid <- runDB $ insert project
+            redirect (CadProjImgsR projectid)
+        _ -> redirect HomeR 
 
 getCadProjImgsR :: ProjectId -> Handler Html
 getCadProjImgsR projectid = do 
@@ -52,8 +49,8 @@ postCadProjImgsR projectid = do
     ((result,_),_) <- runFormPost formProjectImg
     case result of
         FormSuccess (destaque, cover) -> do
-            liftIO $ fileMove destaque ("static/" ++ (unpack $ fileName destaque))
-            liftIO $ fileMove cover ("static/" ++ (unpack $ fileName cover))
+            liftIO $ fileMove destaque ("static/proj/" ++ (unpack $ fileName destaque))
+            liftIO $ fileMove cover ("static/proj/" ++ (unpack $ fileName cover))
             runDB $ update projectid [ProjectDes =. (Just (fileName destaque)), ProjectCover =. (Just (fileName cover))]
             redirect (PerfilProjectR projectid) 
         _ -> do

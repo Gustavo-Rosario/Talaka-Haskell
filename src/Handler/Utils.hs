@@ -28,3 +28,10 @@ dateFormatMonth (y1:y2:y3:y4:_:'0':'9':_:d1:d2:[]) = [d1,d2]++" de Setembro de "
 dateFormatMonth (y1:y2:y3:y4:_:'1':'0':_:d1:d2:[]) = [d1,d2]++" de Outubro de "++[y1,y2,y3,y4]
 dateFormatMonth (y1:y2:y3:y4:_:'1':'1':_:d1:d2:[]) = [d1,d2]++" de Novembro de "++[y1,y2,y3,y4]
 dateFormatMonth (y1:y2:y3:y4:_:'1':'2':_:d1:d2:[]) = [d1,d2]++" de Dezembro de "++[y1,y2,y3,y4]
+
+getImgStatic :: [Text] -> Text -> Route Static
+getImgStatic path fileName = StaticRoute (path++[fileName]) []
+
+
+
+

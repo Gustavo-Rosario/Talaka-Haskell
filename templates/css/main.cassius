@@ -8,6 +8,12 @@ body
     width:100%
     left:0
     top:0
+#bgSign
+    position:absolute
+    height:100%
+    width:100%
+    left:0
+    top:0
     display:flex
     justify-content:center
 
@@ -392,3 +398,5 @@ div.footer .metas .metaFinal
     margin:10px 0
     border:1px solid #e9e9e9
     padding:1%
+#textoLeft p, #textoLeft h2, #textoLeft h1
+    text-align:left

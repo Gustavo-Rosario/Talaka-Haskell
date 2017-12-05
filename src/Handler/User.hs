@@ -44,8 +44,8 @@ postCadUserImgsR userid = do
     ((result,_),_) <- runFormPost formImgs
     case result of
         FormSuccess (perfil, cover) -> do
-            liftIO $ fileMove perfil ("static/" ++ (unpack $ fileName perfil))
-            liftIO $ fileMove cover ("static/" ++ (unpack $ fileName cover))
+            liftIO $ fileMove perfil ("static/img/users/" ++ (unpack $ fileName perfil))
+            liftIO $ fileMove cover ("static/img/covers/" ++ (unpack $ fileName cover))
             runDB $ update userid [UserImg =. (Just (fileName perfil)), UserCover =. (Just (fileName cover))]
             (User name login email _ bio img cover date) <- runDB $ get404 userid
             setSession "_USER" (pack(show $ User name login email "" bio img cover date))
@@ -67,8 +67,9 @@ postCadUserImgsR userid = do
 getPerfilUserR :: UserId -> Handler Html
 getPerfilUserR userid = do
     user <- runDB $ get404 userid
-    userImg <- return $ StaticRoute ["img", fromJust(userImg user)] []
-    userCover <- return $ StaticRoute ["img", fromJust(userCover user)] []
+    userImg <- return $ StaticRoute ["img","users", fromJust(userImg user)] []
+    userCover <- return $ StaticRoute ["img","covers", fromJust(userCover user)] []
+    userProjs <- runDB $ selectList [ProjectCreator ==. userid] [Desc ProjectId]
     -- Criar a imagem da fora para poder usar dentro do template.
     -- o Static Route é uma coisa pura, e como estamos dentro da Handler, temos que trocar.
     defaultLayout $ do

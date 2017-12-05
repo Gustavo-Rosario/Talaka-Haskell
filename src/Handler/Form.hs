@@ -28,6 +28,7 @@ formProject userid = renderDivs $ Project
     <*> pure userid
     <*> aopt hiddenField "" Nothing
     <*> aopt hiddenField "" Nothing
+    <*> areq hiddenField "" (Just 0)
     
 formProjectImg :: Form (FileInfo, FileInfo)
 formProjectImg = renderDivs $ (,)

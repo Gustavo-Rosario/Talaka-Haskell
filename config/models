@@ -44,6 +44,7 @@ Project json
     creator         UserId
     des             Text Maybe
     cover           Text Maybe
+    approved        Int default=0
     deriving Show
 
 

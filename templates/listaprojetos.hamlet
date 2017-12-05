@@ -9,7 +9,7 @@
 <ul .listaProjetos>
     $forall (project, creator, projId) <- projcreator
         <li>
-            <div .cadaFoto>
+            <div .cadaFoto style=background-image:url(@{StaticR (getImgStatic ["img","proj"] ( fromJust $ projectDes project)) }>
             <h3>
                 #{projectTitle project} 
             <h4>

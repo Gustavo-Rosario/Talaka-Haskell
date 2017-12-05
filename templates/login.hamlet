@@ -1,6 +1,6 @@
 <div #loginFull>
     <div id="signup">
-        <div .register>
+        <div .register #textoLeft>
             <h1>
                 Bem-Vindo!
             <h2>
