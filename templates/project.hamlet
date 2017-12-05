@@ -1,16 +1,4 @@
 <div #fundoProjeto>
-    <div #financiamento>
-        <h1>
-            Apoie o projeto!
-        <h2>
-            Doe dinheiro para tirar essa ideia do papel
-        <p>
-            Nós do Talaka Pocket queremos que todos os projetos sejam incríveis e, para isto, precisamos do apoio de cada um dos usuários!
-        <a href=@{HomeR} .botao .principal>
-            Financiar
-        <a href=@{HomeR} .botao .cancelar>
-            Cancelar
-            
     <div #coverProjeto style="background-image:url(@{StaticR projetoCover})">
     <div #bgPreto>
     <a href=@{HomeR}>
@@ -33,18 +21,38 @@
             <p>
                 #{projectDescription projeto}
             <div .acoes>
-                <a href=@{HomeR} .botao .principal>
+                <div #btnFinanciar .botao .principal>
                     Financiar
-                <a href=@{HomeR} .botao .alternativo>
+                <div #btnComentar .botao .alternativo>
                     Comentar
-<div #comentarioArea>
-    <form action=@{ComentarProjectR projectId} method=post enctype=#{enctype}>
-        ^{widget}
-        <input type=submit value=Comentar>
-    <h3>
-        Comentários: 
-    <ul>
-        $forall (c, u) <- comenuser
-            <li>
-                #{userName u}: #{commentComment c}
-                
+<div #bgMenu>
+    <div #close>
+    <div #financiamento>
+        <h1>
+            Apoie o projeto!
+        <h2>
+            Doe dinheiro para tirar essa ideia do papel
+        <p>
+            Nós do Talaka Pocket queremos que todos os projetos sejam incríveis e, para isto, precisamos do apoio de cada um dos usuários!
+        <a href=@{HomeR} .botao .principal>
+            Financiar
+        <a href=@{HomeR} .botao .cancelar>
+            Cancelar
+    <div #comentarioArea>
+        <h1>
+            Comente!
+        <h2>
+            Deixe sua opinião sobre este projeto!
+        <p>
+            Faça com que outros usuários conheçam um pouco mais sobre você e o que você pensa.
+        <form action=@{ComentarProjectR projectId} method=post enctype=#{enctype}>
+            ^{widget}
+            <input type=submit value=Comentar .botao .principal>
+        <h3>
+            Comentários realizados 
+        <ul #listaComentarios>
+            $forall (c, u) <- comenuser
+                <li>
+                    <b>
+                        #{userName u}
+                    #{commentComment c}

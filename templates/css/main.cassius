@@ -560,6 +560,7 @@ aside a
     justify-content:space-between
 #textoProjeto .acoes
     width:200px
+    display:flex
 #textoProjeto .acoes a
     width:50%
 #textoProjeto .acoes .alternativo
@@ -568,7 +569,7 @@ aside a
 #comentarioArea
     display:none
 
-#financiamento
+#financiamento, #comentarioArea
     position:absolute
     width:40%
     height:100%
@@ -582,15 +583,59 @@ aside a
     flex-direction:column
     justify-content:center
     align-items:center
-#financiamento h1
+    display:none
+#financiamento h1, #comentarioArea h1
     font-size:40px
     color:#A50249
     margin:0
-#financiamento h2
+#financiamento h2, #comentarioArea h2
     font-size:22px
     color:#A50249
     margin:5px 0
-#financiamento p 
+#financiamento p, #comentarioArea p
     font-size:16px
     color:#3e3e3e
     margin:0
+#comentarioArea
+    overflow:auto
+#bgMenu
+    position:absolute
+    background-color:rgba(0,0,0,.8)
+    left:0
+    top:0
+    width:100%
+    height:100%
+    z-index:2
+    display:none
+#close
+    position:absolute
+    left:0
+    width:60%
+    top:0
+    height:100%
+#comentarioArea h3
+    margin:20px auto 0 auto
+    text-align:left
+    font-size:25px
+    color:#3A0E85
+#listaComentarios
+    text-align:left
+    padding:0
+    width:100%
+#listaComentarios li
+    border:1px solid #e2e2e2
+    box-sizing:border-box
+    padding:1%
+    text-align:left
+    margin:1% 0
+#comentarioArea textarea
+    box-sizing:border-box
+    padding:2%
+    min-height:150px
+    resize:none
+    width:300px
+#comentarioArea label
+    display:none
+    
+
+    
