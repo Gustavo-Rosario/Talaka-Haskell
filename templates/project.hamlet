@@ -1,3 +1,11 @@
+<div #fundoProjeto>
+    <div #coverProjeto>
+    <div #bgPreto>
+    <div #informacoesProjeto>
+    
+        
+
+
 <img src=@{StaticR projetoDes}>
 <img src=@{StaticR projetoCover}>
 

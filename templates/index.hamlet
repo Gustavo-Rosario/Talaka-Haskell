@@ -17,7 +17,4 @@
                     <i .material-icons>
                         screen_lock_landscape
             
-            <a href=@{AdminR}>
-                <li #administrador>
-                    <i .material-icons>
-                        person_pin
+           

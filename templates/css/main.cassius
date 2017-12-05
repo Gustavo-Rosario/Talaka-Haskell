@@ -484,3 +484,24 @@ aside a
 #adminProjetos i:hover
     transform:scale(1.05)
     color:#D50E65
+#fundoProjeto
+    position: fixed
+    top:0
+    left:0
+    width: 100%
+    left:100%
+#coverProjeto, #bgPreto
+    width:100%
+    height:100%
+    position: absolute
+
+#coverProjeto
+    background-size:cover
+    background-position: center center
+    background-repeat: no-repeat
+    filter:blur(3px)
+#bg
+    background-color:rgba(0,0,0,.5)
+#informacoesProjeto
+    width: 60%
+    position: relative
