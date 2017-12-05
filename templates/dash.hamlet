@@ -1,0 +1,34 @@
+<div #areaTotal>
+    <aside>
+        <h1>
+            Talaka Pocket
+            <b>
+                Analytics
+        <a href=@{HomeR}>
+            Voltar à Página Inicial
+        <a href=@{ExploreR}>
+            Explorar projetos
+        <a href=@{LogoutR} .botao .principalAlt>
+            Deslogar
+            
+    <div #aprojetos>
+        <h1>
+            Bem-vindo, Administrador!
+        <h2>
+            Confira os últimos projetos cadastrados na plataforma e dê o seu aval: permanecem ou não?
+        <ul #adminProjetos>
+            <li>
+                <p>
+                    Nome do Projeto
+                    <b>
+                        Nome do autor
+                <div .opcoes>
+                    <i .material-icons>
+                        remove_red_eye
+                    <i .material-icons>
+                        check_circle
+                    <i .material-icons>
+                        remove_circle
+                        
+        
+        

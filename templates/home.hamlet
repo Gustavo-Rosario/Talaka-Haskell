@@ -1,9 +1,9 @@
 <ul>
     <li>
-        <a href=@{ListProjR}>
-            Lista Projetos
+        <a .btn .pink .darken-3 href=@{ExploreR}>
+            Explore Projetos
     <li>
-        <a href=@{CadProjR}>
+        <a .btn .pink .darken-3 href=@{CadProjR}>
             Cadastrar Projeto
     <li>
         <form action=@{LogoutR} method=post>

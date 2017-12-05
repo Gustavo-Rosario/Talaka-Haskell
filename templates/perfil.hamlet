@@ -49,10 +49,11 @@
                                     <span .metaFinal>
                                         Meta Final <br>
                                         R$ #{projectMeta project}
-                                <a .btn .btn-primary  .linkProjeto>
+                                <a href=@{PerfilProjectR projId} .btn .btn-primary .pink .darken-3 .linkProjeto>
                                     <i .material-icons>
                                         remove_red_eye
-                                    Ver Projeto
+                                    <span .hide-on-small-only>
+                                        Ver Projeto
         
         <div #apoiado>
             <ul .listaProjetos>

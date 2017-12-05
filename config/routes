@@ -9,16 +9,22 @@
 -- Projeto
 /projeto/cadastrar                              CadProjR        GET POST
 /projeto/cadastrar/#ProjectId/imagens           CadProjImgsR    GET POST
-/projeto/lista                                  ListProjR       GET
+--/projeto/lista                                  ListProjR       GET
 /projeto/#ProjectId/apagar                      ApagarProjR     POST
 /perfil/#UserId                                 PerfilUserR     GET
 !/projeto/#ProjectId                            PerfilProjectR  GET
+/comentar/#ProjectId                            ComentarProjectR POST
+
+-- Busca
+/explore                                        ExploreR        GET
+/exploreAux                                     BuscaAuxR      POST
+/explore/#Text                                  BuscaR          GET
+
 
 -- Login
 /login                                          LoginR          GET POST
 /logout                                         LogoutR         POST
 
-/comentar/#ProjectId                            ComentarProjectR POST
-
+-- Admin
 /talaka/admin/dash                              AdminR      GET
 

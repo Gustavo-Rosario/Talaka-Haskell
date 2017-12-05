@@ -70,3 +70,9 @@ formLogin :: Form(Text, Text)
 formLogin = renderDivs $ (,)
     <$> areq textField "Email: " Nothing
     <*> areq passwordField "Senha: " Nothing
+    
+-- BUSCA 
+formSearch :: Form(Text, Text)
+formSearch = renderDivs $ (,)
+    <$> areq textField "Busca" Nothing
+    <*> areq hiddenField "" (Just "alo")

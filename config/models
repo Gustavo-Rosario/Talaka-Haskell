@@ -55,3 +55,9 @@ Comment
     dateTime        UTCTime
     report          Int
     
+Financing
+    user            UserId
+    project         ProjectId
+    vlFinancing     Int
+    dateFinancing   Day
+    type            Text

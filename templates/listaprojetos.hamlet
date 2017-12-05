@@ -1,3 +1,9 @@
+<form action=@{BuscaAuxR} method=post enctype=#{enctype}>
+    ^{widget}
+    <input type=submit .btn .btn-primary .pink .darken-3 value=Go>
+        <i .material-icons>
+            search
+    
 <div #explore>
     <i .material-icons>
         chat
@@ -25,7 +31,8 @@
                         <span .metaFinal>
                             Meta Final <br>
                             R$ #{projectMeta project}    
-                    <a .btn .btn-primary href=@{ PerfilProjectR projId} .linkProjeto>
+                    <a .pink .darken-3 .btn .btn-primary href=@{ PerfilProjectR projId} .linkProjeto>
                         <i .material-icons>
                             remove_red_eye
-                        Ver Projeto
+                        <span .hide-on-small-only>
+                            Ver Projeto

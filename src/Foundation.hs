@@ -58,6 +58,9 @@ instance Yesod App where
     isAuthorized CadUserR _ = return Authorized
     isAuthorized (CadUserImgsR _) _ = return Authorized
     isAuthorized (StaticR _) _ = return Authorized
+    isAuthorized ExploreR _ = return Authorized
+    isAuthorized BuscaAuxR _ = return Authorized
+    isAuthorized (BuscaR _ )_ = return Authorized
     isAuthorized AdminR _ = isAdmin
     isAuthorized _ _ = isUser
 

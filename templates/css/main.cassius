@@ -261,7 +261,7 @@ footer p
 
 #loginFull #signup
     width:65%
-    background-image:url('static/img/bgmem.png')
+    background-image:url('/static/img/bgmem.png')
     
 #loginFull .register
     background-color:rgba(255,255,255,.8)
@@ -400,3 +400,87 @@ div.footer .metas .metaFinal
     padding:1%
 #textoLeft p, #textoLeft h2, #textoLeft h1
     text-align:left
+    
+#areaTotal
+    position:fixed
+    height:100%
+    width:100%
+    left:0
+    top:0
+    display: flex
+aside, #aprojetos
+    position:relative
+    height:100%
+    box-sizing:border-box
+    padding:2%
+    
+aside
+    width:30%
+    background-image:url('/static/img/bg.png')
+    display: flex
+    flex-direction:column
+    justify-content:center
+    align-items:center
+aside h1
+    font-family: 'Courgette', cursive
+    font-size:22px
+    margin:10px 0
+    color:#fff
+    text-align:center
+aside h1 b
+    font-size:14px
+    color:#d2d2d2
+    display:block
+    margin-bottom:30px
+aside a
+    margin:10px 0
+#aprojetos
+    width:75%
+    overflow: auto
+#aprojetos h1, #aprojetos h2
+    margin:0 0 5px 0
+#aprojetos h1
+    font-size:22px
+    color:#A50249
+#aprojetos h2
+    color:#D50E65
+    font-size:18px
+#adminProjetos
+    border:1px solid #d2d2d2
+    box-sizing: border-box
+    padding:2%
+#adminProjetos li
+    width:100%
+    padding:1%
+    box-sizing:border-box
+    border:1px solid #5295C1
+    transition:.3s
+    display: flex
+    justify-content:space-between
+    margin:0 0 20px 0
+#adminProjetos li p
+    font-size:20px
+    font-weight: 500
+#adminProjetos li p b
+    display: block
+    font-weight: 400
+#adminProjetos li:hover
+    border-color:#5295C1
+#adminProjetos .opcoes
+    font-size: 20px
+    display: flex
+    width: 25%
+    text-align: right
+    padding: 0 2%
+    flex-direction: row
+    height: 100px
+    align-items: center
+    justify-content: flex-end
+#adminProjetos i
+    margin:0 2%
+    transition:.3s
+    cursor:pointer
+    color:#3A0E85
+#adminProjetos i:hover
+    transform:scale(1.05)
+    color:#D50E65

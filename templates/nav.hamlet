@@ -1,7 +1,7 @@
 <ul #projectnav .dropdown-content>
   <li>
-    <a href=@{ListProjR}>
-        Lista de Projetos
+    <a href=@{ExploreR}>
+        Explorar Projetos
         <i .material-icons .left>
             view_list
   <li>

@@ -64,9 +64,9 @@ getPerfilProjectR :: ProjectId -> Handler Html
 getPerfilProjectR projectId = do
     projeto <- runDB $ get404 projectId
     usuario <- runDB $ get404 $ projectCreator projeto
-    userImg <- return $ StaticRoute ["img", fromJust(userImg usuario)] []
-    projetoDes <- return $ StaticRoute ["img", fromJust(projectDes projeto )] []
-    projetoCover <- return $ StaticRoute ["img", fromJust(projectCover projeto)] []
+    userImg <- return $ StaticRoute ["img", "users", fromJust(userImg usuario)] []
+    projetoDes <- return $ StaticRoute ["img", "proj", fromJust(projectDes projeto )] []
+    projetoCover <- return $ StaticRoute ["img", "proj", fromJust(projectCover projeto)] []
     comentarios <- runDB $ selectList [CommentProject ==. projectId] [Desc CommentDateTime]
     comenuser <- sequence $ map (\ x -> (runDB $ get404 $ commentUser . entityVal $ x) >>= \y -> return (entityVal x,y)) comentarios
     (widget, enctype) <- generateFormPost $ formComment projectId 
@@ -76,25 +76,21 @@ getPerfilProjectR projectId = do
         $(whamletFile "templates/project.hamlet")
         
 -- Listar Projetos        
-getListProjR :: Handler Html
-getListProjR = do
-    projects <- runDB $ selectList [] [Desc ProjectDateBegin]
-    projcreator <- sequence $ map (\proj -> (runDB $ get404 $ projectCreator . entityVal $ proj) >>= \creator -> return (entityVal proj, creator, entityKey proj) ) projects
-    defaultLayout $ do
-        setTitle "Talaka Pocket - Lista de Projetos"
-        $(whamletFile "templates/listaprojetos.hamlet")
-        $(whamletFile "templates/footer.hamlet")
+-- getListProjR :: Handler Html
+-- getListProjR = do
+--     projects <- runDB $ selectList [] [Desc ProjectDateBegin]
+--     projcreator <- sequence $ map (\proj -> (runDB $ get404 $ projectCreator . entityVal $ proj) >>= \creator -> return (entityVal proj, creator, entityKey proj) ) projects
+--     defaultLayout $ do
+--         setTitle "Talaka Pocket - Lista de Projetos"
+--         $(whamletFile "templates/listaprojetos.hamlet")
+--         $(whamletFile "templates/footer.hamlet")
         
 
 postApagarProjR :: ProjectId -> Handler Html
 postApagarProjR projectId = do
     _ <- runDB $ get404 projectId
     runDB $ delete projectId
-    redirect ListProjR
-
-selectProject :: Text -> Handler [Entity Project]
-selectProject search = runDB $ rawSql "SELECT ?? FROM project WHERE title LIKE ?" [toPersistValue search]
-
+    redirect ExploreR
 
 
 

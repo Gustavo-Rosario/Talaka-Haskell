@@ -7,14 +7,10 @@
                 
     <div #menu>
         <ul>
-            <a href=@{ListProjR}>
-                <li #listarProjetos>
+            <a href=@{ExploreR}>
+                <li #buscarProjetos>
                     <i .material-icons>
-                        list
-                    
-            <li #buscarProjetos>
-                <i .material-icons>
-                    search
+                        search
                         
             <a href=@{LoginR}>
                 <li #login>
