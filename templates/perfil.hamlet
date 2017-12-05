@@ -28,8 +28,50 @@
                 Projetos Criados
             <li>
                 Projetos Financiados
-                
-    
-    
+        <div #financiado>
+            <ul .listaProjetos>
+                <li>
+                    <div .cadaFoto>
+                    <h3>
+                        titulo do projeto
+                    <h4>
+                        nome do usuario
+                    <p>
+                        descricao do projeto
+                    
+                        <div .footer>
+                            <p .metas>
+                                <span .metaAtual>
+                                    Valor acumulado <br>
+                                    R$ 000
+                                <span .metaFinal>
+                                    Meta Final <br>
+                                    R$ 000
+                            <a .btn .btn-primary  .linkProjeto>
+                                <i .material-icons>
+                                    remove_red_eye
+                                Ver Projeto
         
-        
+        <div #apoiado>
+            <ul .listaProjetos>
+                <li>
+                    <div .cadaFoto>
+                    <h3>
+                        titulo do projeto
+                    <h4>
+                        nome do usuario
+                    <p>
+                        descricao do projeto
+                    
+                        <div .footer>
+                            <p .metas>
+                                <span .metaAtual>
+                                    Valor acumulado <br>
+                                    R$ 000
+                                <span .metaFinal>
+                                    Meta Final <br>
+                                    R$ 000
+                            <a .btn .btn-primary  .linkProjeto>
+                                <i .material-icons>
+                                    remove_red_eye
+                                Ver Projeto

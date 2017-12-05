@@ -94,6 +94,12 @@ postApagarProjR projectId = do
     _ <- runDB $ get404 projectId
     runDB $ delete projectId
     redirect ListProjR
-    
+
+selectProject :: Text -> Handler [Entity Project]
+selectProject search = runDB $ rawSql "SELECT ?? FROM project WHERE title LIKE ?" [toPersistValue search]
+
+
+
+
 -- getby
 -- <-. maybe like

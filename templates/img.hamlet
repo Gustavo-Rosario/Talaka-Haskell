@@ -1,5 +1,14 @@
-<h1>
-    Upar imagens
-<form action=@{CadUserImgsR userid} method=post enctype=#{enctype}>
-    ^{widget}
-    <input type=submit value=Inserir fotos>
+<div #bg>
+    <div #signupF .formImg .formText>
+        <h1>
+            Cadastro de Usuário
+        <h2>
+            Faça upload de imagens
+        <p>
+            Escolha as imagens para serem visualizadas por outros usuários da plataforma
+        <form action=@{CadUserImgsR userid} method=post enctype=#{enctype}>
+            ^{widget}
+            <div .centralizarBotoes>
+                <input type=submit value=Finalizar cadastro .botao .principal>
+                <a href=@{HomeR} .botao .alternativo>   
+                    Voltar à página inicial

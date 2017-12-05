@@ -8,6 +8,8 @@ body
     width:100%
     left:0
     top:0
+    display:flex
+    justify-content:center
 
 #pocket
     margin:auto
@@ -256,13 +258,13 @@ footer p
     background-image:url('static/img/bgmem.png')
     
 #loginFull .register
-    position: relative
-    height: 180px
-    top: 50%
     background-color:rgba(255,255,255,.8)
-    padding:2%
-    box-sizing:border-box
-    margin: -90px auto 0 auto
+    position: relative
+    height: 230px
+    top: 50%
+    padding: 2%
+    box-sizing: border-box
+    margin: -115px auto 0 auto
     width: 80%
 #loginFull a
     margin-top:15px
@@ -358,6 +360,35 @@ div.footer .metas .metaFinal
     width: 50%
 .linkProjeto i
     font-size:13px
-    
-    
-    
+#signup
+    width:85%
+    margin:auto
+    box-sizing:border-box
+    padding:2%
+    border:1px solid #e2e2e2
+
+
+#signup h1, #signup h2, #signup p, .formText h1, .formText h2, .formText p
+    text-align:center
+#signupF h1, .formText h1
+    margin:auto
+    text-transform:uppercase
+    font-weight:600
+    font-size:22px
+    color:#A50249
+#signupF h2, .formText h2
+    font-size:18px
+    color:#D50E65
+    margin:5px 0
+#signupF p, .formText p
+    font-size:14px
+    color:#3c3c3c
+    margin:0 0 15px 0
+.centralizarBotoes
+    margin:auto
+    display:table
+
+.formImg div:not(:last-child)
+    margin:10px 0
+    border:1px solid #e9e9e9
+    padding:1%

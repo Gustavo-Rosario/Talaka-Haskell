@@ -18,7 +18,7 @@ getCadUserR = do
     (widget, enctype) <- generateFormPost formUser
     defaultLayout $ do
         setTitle "Talaka Pocket - Cadastro de Usuário"
-        $(whamletFile "templates/nav.hamlet")
+        -- $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/caduser.hamlet")
 
 postCadUserR :: Handler Html
@@ -35,7 +35,7 @@ getCadUserImgsR userid = do
     (widget, enctype) <- generateFormPost formImgs
     defaultLayout $ do
         setTitle "Talaka Pocket - Imagens Perfil"
-        $(whamletFile "templates/nav.hamlet")
+        -- $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/img.hamlet")
         
 postCadUserImgsR :: UserId -> Handler Html

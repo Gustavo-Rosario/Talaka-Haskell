@@ -1,5 +1,13 @@
-<h1>
-    Cadastro de Usuario
-<form action=@{CadUserR} method=post enctype=#{enctype}>
-    ^{widget}
-    <input type=submit value=Cadastrar Usuário>
+<div #signup .formText>
+    <h1>
+        Cadastro de Usuário
+    <h2>
+        Junte-se ao Talaka
+    <p>
+        A plataforma de financiamento criada pensando em quadrinistas, ilustradores e amantes de quadrinhos.
+    <form action=@{CadUserR} method=post enctype=#{enctype}>
+        ^{widget}
+        <div .centralizarBotoes>
+            <input type=submit value=Cadastrar Usuário .botao .principal>
+            <a href=@{HomeR} .botao .alternativo>   
+                Voltar à página inicial
