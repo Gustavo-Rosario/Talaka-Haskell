@@ -1,5 +1,15 @@
-<h1>
-    Upar imagens
-<form action=@{CadProjImgsR projectid} method=post enctype=#{enctype}>
-    ^{widget}
-    <input type=submit value=Inserir fotos>
+<div #bg>
+    <div #signupF .formImg .formText>
+        <h1>
+            Cadastro de Projeto
+        <h2>
+            Faça upload de imagens do projeto
+        <p>
+            Escolha as imagens para serem visualizadas por outros usuários da plataforma sobre seu projeto
+        
+        <form action=@{CadProjImgsR projectid} method=post enctype=#{enctype}>
+            ^{widget}
+            <div .centro>
+                <input type=submit value=Inserir fotos .botao .principal>
+                <a href=@{HomeR} .botao .alternativo>   
+                    Voltar à página inicial

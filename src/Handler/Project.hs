@@ -40,7 +40,7 @@ getCadProjImgsR projectid = do
     (widget, enctype) <- generateFormPost formProjectImg
     defaultLayout $ do
         setTitle "Talaka Pocket - Imagens do Projeto"
-        $(whamletFile "templates/nav.hamlet")
+        -- $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/projImg.hamlet")
         
 postCadProjImgsR :: ProjectId -> Handler Html

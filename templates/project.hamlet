@@ -17,6 +17,8 @@
                 <span>
                     #{show $ projectDateBegin projeto}
                 <span>
+                    R$ #{projectCollected projeto}
+                <span>
                     R$ #{projectMeta projeto}
             <p>
                 #{projectDescription projeto}

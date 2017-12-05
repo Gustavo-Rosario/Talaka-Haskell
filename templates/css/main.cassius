@@ -636,6 +636,9 @@ aside a
     width:300px
 #comentarioArea label
     display:none
-    
+.centro
+    margin:auto
+    display:block
+    width:300px
 
     
