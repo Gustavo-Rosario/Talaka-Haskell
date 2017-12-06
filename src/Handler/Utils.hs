@@ -43,3 +43,8 @@ isLogged = do
                 Nothing -> return Nothing
                 Just _ -> return (Just 2)
         Just _ -> return (Just 1)
+
+calcPercent :: Int -> Int -> Float
+calcPercent x y =   100 * ( a / b )
+  where a = fromIntegral x :: Float
+        b = fromIntegral y :: Float

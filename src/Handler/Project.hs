@@ -74,7 +74,7 @@ getPerfilProjectR projectId = do
     (wid, enc) <- generateFormPost formFinancing
     defaultLayout $ do
         setTitle "Talaka Pocket - Página de Campanha"
-        $(whamletFile "templates/home.hamlet")
+        $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/project.hamlet")
         
 -- Listar Projetos        

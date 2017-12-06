@@ -84,6 +84,8 @@ body
 
 #login:after
     content:"Fazer login" 
+#perfil:after
+    content:"Ver perfil"
     
 #administrador:after
     content:"Administrador"
@@ -538,6 +540,24 @@ aside a
     color:#fff
     border-radius:30px
     text-shadow: 0 0 5px #fff
+#informacoesProjeto #barra
+    position: absolute;
+    height: 10px
+    background-color: rgba(255,255,255,.7)
+    bottom: 0px
+    left: 0
+    margin: 0 2.5%
+    width: 100%
+    box-shadow:0 0 3px rgba(255,255,255,.7)
+    border-radius:3px
+#informacoesProjeto #barra #progresso
+    position:relative
+    height:10px
+    background-color:#A50249
+    width:60%
+    left:0
+    top:0
+    border-radius:3px
 #destaqueProjeto
     width: 50%;
     justify-content: center;
@@ -683,4 +703,3 @@ aside a
     animation:none
 #navMenu ul
     display:flex
-    

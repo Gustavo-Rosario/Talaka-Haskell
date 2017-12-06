@@ -27,6 +27,8 @@
                     Financiar
                 <div #btnComentar .botao .alternativo>
                     Comentar
+        <div #barra>
+            <div #progresso style=width:#{(calcPercent (projectCollected projeto) (projectMeta projeto) )}% >
 <div #bgMenu>
     <div #close>
     <div #financiamento>

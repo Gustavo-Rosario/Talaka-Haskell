@@ -12,12 +12,12 @@
                     <i .material-icons>
                         search
             <a href=@{PerfilUserR (toSqlKey 1)}>
-                <li #login>
+                <li #perfil>
                     <i .material-icons>
                         person
             <li #logout>
                 <form action=@{LogoutR} method=post >
-                    <button type=submit>
+                    <button type=submit #deslogar>
                         <i .material-icons>
                             power_settings_new
            
