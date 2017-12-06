@@ -15,7 +15,7 @@
                 <span>
                     #{userName usuario}
                 <span>
-                    #{show $ projectDateBegin projeto}
+                    Aberto até #{dateFormatMonth (show $ projectDateEnd projeto)}
                 <span>
                     R$ #{projectCollected projeto}
                 <span>
@@ -50,6 +50,7 @@
         <form action=@{ComentarProjectR projectId} method=post enctype=#{enctype}>
             ^{widget}
             <input type=submit value=Comentar .botao .principal>
+            
         <h3>
             Comentários realizados 
         <ul #listaComentarios>

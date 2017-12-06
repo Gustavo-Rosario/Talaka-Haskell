@@ -18,6 +18,7 @@ getCadUserR = do
     (widget, enctype) <- generateFormPost formUser
     defaultLayout $ do
         setTitle "Talaka Pocket - Cadastro de Usuário"
+        -- $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/caduser.hamlet")
 
 postCadUserR :: Handler Html
@@ -34,6 +35,7 @@ getCadUserImgsR userid = do
     (widget, enctype) <- generateFormPost formImgs
     defaultLayout $ do
         setTitle "Talaka Pocket - Imagens Perfil"
+        -- $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/img.hamlet")
         
 postCadUserImgsR :: UserId -> Handler Html
@@ -72,6 +74,6 @@ getPerfilUserR userid = do
     -- o Static Route é uma coisa pura, e como estamos dentro da Handler, temos que trocar.
     defaultLayout $ do
         setTitle "Talaka Pocket - Perfil de Usuário"
-        $(whamletFile "templates/home.hamlet")
+        $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/perfil.hamlet")
         $(whamletFile "templates/footer.hamlet")
