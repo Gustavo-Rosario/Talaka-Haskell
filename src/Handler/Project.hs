@@ -71,6 +71,7 @@ getPerfilProjectR projectId = do
     comentarios <- runDB $ selectList [CommentProject ==. projectId] [Desc CommentDateTime]
     comenuser <- sequence $ map (\ x -> (runDB $ get404 $ commentUser . entityVal $ x) >>= \y -> return (entityVal x,y)) comentarios
     (widget, enctype) <- generateFormPost $ formComment projectId 
+    (wid, enc) <- generateFormPost formFinancing
     defaultLayout $ do
         setTitle "Talaka Pocket - Página de Campanha"
         $(whamletFile "templates/home.hamlet")
@@ -94,8 +95,22 @@ postApagarProjR projectId = do
     redirect ExploreR
 
 
--- postFinancingRn :: ProjectId -> Handler Html
-
+postFinanciarR :: ProjectId -> Handler Html
+postFinanciarR projId = do
+    _ <- runDB $ get404 projId
+    (Just user) <- lookupSession "_USERID"
+    Just (Entity userId _) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ user) ] []
+    ((result,_),_) <- runFormPost formFinancing
+    case result of
+        FormSuccess ( vlFinancing ,typeFinancing) -> do
+            actualDate <- fmap utctDay (lift $ liftIO getCurrentTime)    
+            runDB $ insert (Financing userId projId vlFinancing actualDate typeFinancing)
+            redirect (PerfilProjectR projId)
+        _ -> do
+            setMessage [shamlet|
+                <h2> É necessário efetuar login</h2>
+            |]
+            redirect (PerfilProjectR projId)
 
 -- getby
 -- <-. maybe like

@@ -1,10 +1,11 @@
 /static StaticR Static appStatic
 
 -- Talaka Haskell
+-- Usuario
 /                                               HomeR           GET
 /usuario/cadastrar                              CadUserR        GET POST
 /usuario/cadastrar/#UserId/imagens              CadUserImgsR    GET POST
-
+/financing/#ProjectId                           FinanciarR      POST
 
 -- Projeto
 /projeto/cadastrar                              CadProjR        GET POST

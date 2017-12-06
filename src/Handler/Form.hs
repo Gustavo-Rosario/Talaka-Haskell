@@ -81,4 +81,7 @@ formSearch = renderDivs $ (,)
 formFinancing :: Form(Int, Text)
 formFinancing = renderDivs $ (,)
     <$> areq intField "Valor de Financiamento" Nothing
-    <*> areq hiddenField "" (Just "alo")
+    <*> areq (selectFieldList payMethods) "Metodo" Nothing
+    where
+        payMethods :: [(Text,Text)]
+        payMethods = [("Boleto", "boleto"), ("Cartao de Credito", "credit_card")]

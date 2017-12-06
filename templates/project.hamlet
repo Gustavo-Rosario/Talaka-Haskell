@@ -36,9 +36,10 @@
             Doe dinheiro para tirar essa ideia do papel
         <p>
             Nós do Talaka Pocket queremos que todos os projetos sejam incríveis e, para isto, precisamos do apoio de cada um dos usuários!
-        <a href=@{HomeR} .botao .principal>
-            Financiar
-        <a href=@{HomeR} .botao .cancelar>
+        <form action=@{FinanciarR projectId} method=post enctype=#{enc}>
+            ^{wid}
+            <input type=submit .botao .principal value=Financiar >
+        <a href=@{ExploreR} .botao .cancelar>
             Cancelar
     <div #comentarioArea>
         <h1>

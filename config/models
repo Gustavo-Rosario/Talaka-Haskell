@@ -48,16 +48,18 @@ Project json
     deriving Show
 
 
-Comment
+Comment json
     comment         Textarea
     user            UserId
     project         ProjectId
     dateTime        UTCTime
     report          Int
+    deriving Show
     
-Financing
+Financing json
     user            UserId
     project         ProjectId
     vlFinancing     Int
     dateFinancing   Day
     type            Text
+    deriving Show
