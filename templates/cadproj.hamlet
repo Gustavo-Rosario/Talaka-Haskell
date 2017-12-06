@@ -7,4 +7,4 @@
         Descreva seu projeto para que os outros usuários possam conhecer sobre sua campanha
     <form action=@{CadProjR} method=post enctype=#{enctype}>
         ^{widget}
-        <input type="submit" value="Cadastrar">
+        <input type="submit" .botao .principal .centro value="Cadastrar">

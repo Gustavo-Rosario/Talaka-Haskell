@@ -12,10 +12,11 @@
 -- Projeto
 /projeto/cadastrar                              CadProjR        GET POST
 /projeto/cadastrar/#ProjectId/imagens           CadProjImgsR    GET POST
---/projeto/lista                                  ListProjR       GET
+--/projeto/lista                                ListProjR       GET
 /projeto/#ProjectId/apagar                      ApagarProjR     POST
 !/projeto/#ProjectId                            PerfilProjectR  GET
 /comentar/#ProjectId                            ComentarProjectR POST
+ 
 
 -- Busca
 /explore                                        ExploreR        GET

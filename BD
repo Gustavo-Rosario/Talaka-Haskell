@@ -1,3 +1,27 @@
 psql -h ec2-107-22-250-33.compute-1.amazonaws.com -U fsetxzsnqdcesb -d deihj56i7d81k7
 
 3adb084438ab45fa70d685272094bb2fb04cca63b8a98c0d9006f674258c20b0
+
+CREATE OR REPLACE FUNCTION financing_func()
+ RETURNS trigger AS $financing_trigger$
+BEGIN
+	UPDATE Project
+	SET collected = collected + NEW.vl_financing
+	WHERE id = NEW.project;
+	RETURN NEW;
+END;
+$financing_trigger$ LANGUAGE plpgsql;
+
+CREATE TRIGGER tr_financing
+  AFTER INSERT
+  ON financing
+  FOR EACH ROW
+  EXECUTE PROCEDURE financing_func();
+  
+
+alter table public.comment_project_fkey
+drop constraint comment_project_fkey,
+add constraint comment_project_fkey
+   foreign key (id)
+   references project(id)
+   on delete cascade;

@@ -34,7 +34,7 @@ instance Yesod App where
             addStylesheetRemote "https://fonts.googleapis.com/css?family=Courgette"
             addStylesheetRemote "https://fonts.googleapis.com/css?family=Dosis:400,500,700"
             addStylesheetRemote "https://fonts.googleapis.com/icon?family=Material+Icons"
-            addScriptRemote "http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"
+            addScriptRemote "https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"
             addScript $ StaticR js_jquery_js
             addScript $ StaticR js_materialize_js
             toWidget $ $(cassiusFile "templates/css/main.cassius")
@@ -46,6 +46,7 @@ instance Yesod App where
             <html>
                 <head>
                     <title>#{pageTitle p}
+                    <meta name=viewport content="width=device-width, initial-scale=1.0">
                     ^{pageHead p}
                 <body>
                     $forall (status, msg) <- msgs

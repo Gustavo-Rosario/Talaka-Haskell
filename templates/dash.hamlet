@@ -34,8 +34,11 @@
                             <button type=submit>
                                 <i .material-icons>
                                     check_circle
-                        <i .material-icons>
-                            remove_circle
+                        <form id=proj#{show $ fromSqlKey projId} .delProj action=@{ApagarProjR projId} method=post enctype=#{enctype}>
+                            ^{widget}
+                            <button type=submit>    
+                                <i .material-icons>
+                                    remove_circle
                         
         
         

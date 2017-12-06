@@ -76,7 +76,7 @@ getPerfilProjectR projectId = do
     (wid, enc) <- generateFormPost formFinancing
     defaultLayout $ do
         setTitle "Talaka Pocket - Página de Campanha"
-        $(whamletFile "templates/nav.hamlet")
+        -- $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/project.hamlet")
         
 -- Listar Projetos        
@@ -93,8 +93,14 @@ getPerfilProjectR projectId = do
 postApagarProjR :: ProjectId -> Handler Html
 postApagarProjR projectId = do
     _ <- runDB $ get404 projectId
-    runDB $ delete projectId
-    redirect ExploreR
+    ((result,_),_) <- runFormPost formApproved 
+    case result of
+        FormSuccess _ -> do
+            runDB $ deleteWhere [CommentProject ==. projectId]
+            runDB $ delete projectId
+            redirect AdminR
+        _ -> redirect AdminR
+        
 
 
 postFinanciarR :: ProjectId -> Handler Html
@@ -110,7 +116,8 @@ postFinanciarR projId = do
             redirect (PerfilProjectR projId)
         _ -> do
             setMessage [shamlet|
-                <h2> É necessário efetuar login</h2>
+                <h2> 
+                    É necessário efetuar login
             |]
             redirect (PerfilProjectR projId)
 
