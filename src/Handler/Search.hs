@@ -16,7 +16,7 @@ import Handler.Utils
 getExploreR :: Handler Html
 getExploreR = do 
     logged <- isLogged
-    projects <- runDB $ selectList [] [Desc ProjectDateBegin]
+    projects <- runDB $ selectList [ProjectApproved ==. 1] [Desc ProjectDateBegin]
     projcreator <- sequence $ map (\proj -> (runDB $ get404 $ projectCreator . entityVal $ proj) >>= \creator -> return (entityVal proj, creator, entityKey proj) ) projects
     (widget, enctype) <- generateFormPost formSearch
     defaultLayout $ do
@@ -52,4 +52,4 @@ getBuscaR search = do
         $(whamletFile "templates/footer.hamlet")
         
 selectProject :: Text -> Handler [Entity Project]
-selectProject search = runDB $ rawSql "SELECT ?? FROM project WHERE title LIKE ? ORDER BY date_begin DESC" [toPersistValue search]
+selectProject search = runDB $ rawSql "SELECT ?? FROM project WHERE title LIKE ? AND approved = 1 ORDER BY date_begin DESC" [toPersistValue search]

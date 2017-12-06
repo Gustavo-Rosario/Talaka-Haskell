@@ -23,11 +23,16 @@
             <p>
                 #{projectDescription projeto}
             <div .acoes>
-                $maybe _ <- logged
-                    <div #btnFinanciar .botao .principal>
-                        Financiar
+                $maybe nivel <- logged
+                    $case nivel
+                        $of 1
+                            <div #btnFinanciar .botao .principal>
+                                Financiar
+                        $of 2
+                            <div .botao .principal .tooltipped data-position=top data-delay=50 data-tooltip="Admin nao Financia">
+                                ADMIN
                     <div #btnComentar .botao .alternativo>
-                        Comentar
+                        Comentarios
                 $nothing
                     <a href=@{LoginR} .botao .tooltipped .principal data-position=bottom data-delay=50 data-tooltip="Faça login para Financiar">
                         Financiar
@@ -56,10 +61,14 @@
             Deixe sua opinião sobre este projeto!
         <p>
             Faça com que outros usuários conheçam um pouco mais sobre você e o que você pensa.
-        $maybe _ <- logged
-            <form action=@{ComentarProjectR projectId} method=post enctype=#{enctype}>
-                ^{widget}
-                <input type=submit value=Comentar .botao .principal>
+        $maybe nivel <- logged
+            $case nivel
+                $of 1
+                    <form action=@{ComentarProjectR projectId} method=post enctype=#{enctype}>
+                        ^{widget}
+                        <input type=submit value=Comentar .botao .principal>
+                $of 2
+                    LOGADO COMO ADMIN
         $nothing
             Faça Login ou Cadastre-se para Comentar
             <a href=@{LoginR} .botao .principal>
