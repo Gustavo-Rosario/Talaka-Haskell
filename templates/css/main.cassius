@@ -92,7 +92,9 @@ body
 #deslogar
     background-color: transparent
     border: 0
-
+#dashboard:after
+    content:"Ir para dashboard"
+    
 #headerUser
     width:100%
     height:275px

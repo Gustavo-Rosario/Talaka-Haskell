@@ -11,7 +11,7 @@
                 <li #buscarProjetos>
                     <i .material-icons>
                         search
-            <a href=@{PerfilUserR (toSqlKey 1)}>
+            <a href=@{PerfilUserR userId}>
                 <li #perfil>
                     <i .material-icons>
                         person

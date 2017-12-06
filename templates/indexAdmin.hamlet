@@ -12,12 +12,12 @@
                     <i .material-icons>
                         search
             <a href=@{AdminR}>
-                <li #login>
+                <li #dashboard>
                     <i .material-icons>
                         web
             <li #logout>
                 <form action=@{LogoutR} method=post >
-                    <button type=submit>
+                    <button type=submit #deslogar>
                         <i .material-icons>
                             power_settings_new
             
