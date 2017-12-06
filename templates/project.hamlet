@@ -23,10 +23,16 @@
             <p>
                 #{projectDescription projeto}
             <div .acoes>
-                <div #btnFinanciar .botao .principal>
-                    Financiar
-                <div #btnComentar .botao .alternativo>
-                    Comentar
+                $maybe _ <- logged
+                    <div #btnFinanciar .botao .principal>
+                        Financiar
+                    <div #btnComentar .botao .alternativo>
+                        Comentar
+                $nothing
+                    <a href=@{LoginR} .botao .tooltipped .principal data-position=bottom data-delay=50 data-tooltip="Faça login para Financiar">
+                        Financiar
+                    <div #btnComentar .botao .alternativo>
+                        Comentarios
         <div #barra>
             <div #progresso style=width:#{(calcPercent (projectCollected projeto) (projectMeta projeto) )}% >
 <div #bgMenu>
@@ -50,10 +56,14 @@
             Deixe sua opinião sobre este projeto!
         <p>
             Faça com que outros usuários conheçam um pouco mais sobre você e o que você pensa.
-        <form action=@{ComentarProjectR projectId} method=post enctype=#{enctype}>
-            ^{widget}
-            <input type=submit value=Comentar .botao .principal>
-            
+        $maybe _ <- logged
+            <form action=@{ComentarProjectR projectId} method=post enctype=#{enctype}>
+                ^{widget}
+                <input type=submit value=Comentar .botao .principal>
+        $nothing
+            Faça Login ou Cadastre-se para Comentar
+            <a href=@{LoginR} .botao .principal>
+               Logar
         <h3>
             Comentários realizados 
         <ul #listaComentarios>

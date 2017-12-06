@@ -6,7 +6,7 @@
                     Explorar
             <a href=@{CadProjR}>
                 <li>
-                    Cad. Projeto
+                    Inicie um Projeto
     
     <div .centro>
         <a href=@{HomeR}>
@@ -19,9 +19,10 @@
                 <a href=@{MeuPerfilR}>
                     <li>
                         Meu Perfil
-                <a href=@{LogoutR}>
-                    <li>
-                        Logout
+                <li>
+                    <form action=@{LogoutR} method=post >
+                        <button type=submit #deslogar>
+                            Logout
         $nothing
             <ul>
                 <a href=@{CadUserR}>
