@@ -12,6 +12,7 @@ import Database.Persist.Postgresql
 import Handler.Form
 import Data.Maybe
 import Handler.Utils
+import qualified Prelude as P
 
 getCadUserR :: Handler Html
 getCadUserR = do
@@ -63,13 +64,29 @@ postCadUserImgsR userid = do
 --     _ <- runDB $ get404 serieid
 --     runDB $ update serieid [SerieNome =. nome]
 --     sendStatusJSON noContent204 (object ["resp" .= serieid])
-
 getPerfilUserR :: UserId -> Handler Html
 getPerfilUserR userid = do
+    logged <- isLogged
     user <- runDB $ get404 userid
     userImg <- return $ StaticRoute ["img","users", fromJust(userImg user)] []
     userCover <- return $ StaticRoute ["img","covers", fromJust(userCover user)] []
     userProjs <- runDB $ selectList [ProjectCreator ==. userid] [Desc ProjectId]
+    -- Criar a imagem da fora para poder usar dentro do template.
+    -- o Static Route é uma coisa pura, e como estamos dentro da Handler, temos que trocar.
+    defaultLayout $ do
+        setTitle "Talaka Pocket - Perfil de Usuário"
+        $(whamletFile "templates/nav.hamlet")
+        $(whamletFile "templates/perfil.hamlet")
+        $(whamletFile "templates/footer.hamlet")
+        
+getMeuPerfilR :: Handler Html
+getMeuPerfilR = do
+    logged <- isLogged
+    (Just user) <- lookupSession "_USERID"
+    Just (Entity userId user) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ user) ] []
+    userImg <- return $ StaticRoute ["img","users", fromJust(userImg user)] []
+    userCover <- return $ StaticRoute ["img","covers", fromJust(userCover user)] []
+    userProjs <- runDB $ selectList [ProjectCreator ==. userId] [Desc ProjectId]
     -- Criar a imagem da fora para poder usar dentro do template.
     -- o Static Route é uma coisa pura, e como estamos dentro da Handler, temos que trocar.
     defaultLayout $ do

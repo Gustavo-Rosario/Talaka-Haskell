@@ -15,6 +15,7 @@ import Handler.Utils
 
 getExploreR :: Handler Html
 getExploreR = do 
+    logged <- isLogged
     projects <- runDB $ selectList [] [Desc ProjectDateBegin]
     projcreator <- sequence $ map (\proj -> (runDB $ get404 $ projectCreator . entityVal $ proj) >>= \creator -> return (entityVal proj, creator, entityKey proj) ) projects
     (widget, enctype) <- generateFormPost formSearch
@@ -40,6 +41,7 @@ postBuscaAuxR = do
 
 getBuscaR :: Text -> Handler Html
 getBuscaR search = do
+    logged <- isLogged
     projects <- selectProject ("%" <> search <> "%")
     projcreator <- sequence $ map (\proj -> (runDB $ get404 $ projectCreator . entityVal $ proj) >>= \creator -> return (entityVal proj, creator, entityKey proj) ) projects
     (widget, enctype) <- generateFormPost formSearch

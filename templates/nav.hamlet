@@ -14,10 +14,19 @@
                 talaka
     
     <div .direita>
-        <ul>
-            <a href=@{HomeR}>
-                <li>
-                    Meu Perfil
-            <a href=@{LogoutR}>
-                <li>
-                    Logout
+        $maybe _ <- logged
+            <ul>
+                <a href=@{MeuPerfilR}>
+                    <li>
+                        Meu Perfil
+                <a href=@{LogoutR}>
+                    <li>
+                        Logout
+        $nothing
+            <ul>
+                <a href=@{CadUserR}>
+                    <li>
+                        Cadastre-se
+                <a href=@{LoginR}>
+                    <li>
+                        Login

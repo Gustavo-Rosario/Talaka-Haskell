@@ -6,13 +6,14 @@
 /usuario/cadastrar                              CadUserR        GET POST
 /usuario/cadastrar/#UserId/imagens              CadUserImgsR    GET POST
 /financing/#ProjectId                           FinanciarR      POST
+/perfil/#UserId                                 PerfilUserR     GET
+/meuperfil                                      MeuPerfilR      GET
 
 -- Projeto
 /projeto/cadastrar                              CadProjR        GET POST
 /projeto/cadastrar/#ProjectId/imagens           CadProjImgsR    GET POST
 --/projeto/lista                                  ListProjR       GET
 /projeto/#ProjectId/apagar                      ApagarProjR     POST
-/perfil/#UserId                                 PerfilUserR     GET
 !/projeto/#ProjectId                            PerfilProjectR  GET
 /comentar/#ProjectId                            ComentarProjectR POST
 

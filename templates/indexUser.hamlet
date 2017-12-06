@@ -11,7 +11,7 @@
                 <li #buscarProjetos>
                     <i .material-icons>
                         search
-            <a href=@{PerfilUserR userId}>
+            <a href=@{MeuPerfilR}>
                 <li #perfil>
                     <i .material-icons>
                         person
