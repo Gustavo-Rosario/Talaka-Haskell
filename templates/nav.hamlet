@@ -1,30 +1,23 @@
-<ul #projectnav .dropdown-content>
-  <li>
-    <a href=@{ExploreR}>
-        Explorar Projetos
-        <i .material-icons .left>
-            view_list
-  <li>
-    <a href=@{CadProjR}>
-        Cadastro de Projeto (Para teste)
-        <i .material-icons .left>
-            add_circle
-  <li .divider>
-  <li>
-    <a>
-        three
-
-<nav .purple .accent-2>
-    <div .nav-wrapper>
-        <a .brand-logo .center >
-            talaka
-        <ul .left .hide-on-med-and-down>
-            <li>
-                <a>
-                    Admin
-            <li>
-                <a .dropdown-button data-activates=projectnav >
-                    Projetos
-                    <i .material-icons .right>
-                        arrow_drop_down
+<nav #navMenu>
+    <div .esquerda>
+        <ul>
+            <a href=@{ExploreR}>
+                <li>
+                    Explorar
+            <a href=@{CadProjR}>
+                <li>
+                    Cad. Projeto
     
+    <div .centro>
+        <a href=@{HomeR}>
+            <h1>
+                talaka
+    
+    <div .direita>
+        <ul>
+            <a href=@{HomeR}>
+                <li>
+                    Meu Perfil
+            <a href=@{LogoutR}>
+                <li>
+                    Logout

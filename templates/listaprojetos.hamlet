@@ -1,8 +1,4 @@
-<form action=@{BuscaAuxR} method=post enctype=#{enctype}>
-    ^{widget}
-    <input type=submit .btn .btn-primary .pink .darken-3 value=Go>
-        <i .material-icons>
-            search
+
     
 <div #explore>
     <i .material-icons>
@@ -13,6 +9,10 @@
         Conheça os incríveis projetos criados pelos quadrinistas nacionais
 
 <ul .listaProjetos>
+    <form action=@{BuscaAuxR} method=post enctype=#{enctype}>
+        ^{widget}
+        <input type=submit .btn .btn-primary .pink .darken-3 value=Buscar #buscar placeholder='Busque por um projeto'>
+        
     $forall (project, creator, projId) <- projcreator
         <li>
             <div .cadaFoto style=background-image:url(@{StaticR (getImgStatic ["img","proj"] ( fromJust $ projectDes project)) }>

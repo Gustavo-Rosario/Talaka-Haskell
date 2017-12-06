@@ -94,6 +94,8 @@ postApagarProjR projectId = do
     redirect ExploreR
 
 
+-- postFinancingRn :: ProjectId -> Handler Html
+
 
 -- getby
 -- <-. maybe like

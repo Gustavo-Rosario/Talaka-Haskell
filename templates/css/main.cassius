@@ -87,7 +87,9 @@ body
     
 #administrador:after
     content:"Administrador"
-    
+#deslogar
+    background-color: transparent
+    border: 0
 
 #headerUser
     width:100%
@@ -292,7 +294,7 @@ footer p
 #explore
     width:100%
     height:200px
-    background-color:#A50249
+    background-color:#094F7D
     background-size:cover
     background-position:center center
     text-align:center
@@ -315,7 +317,14 @@ footer p
     margin:auto
     flex-wrap: wrap;
     position:relative
-    
+    min-height:300px
+#buscar
+    margin:auto
+    display:block
+.listaProjetos form
+    width:100%
+    display:block
+    margin:10px auto
 .listaProjetos li
     width:30%
     margin:1.5%
@@ -542,6 +551,10 @@ aside a
     height:100%
     display:flex
     align-items:flex-end
+    transition:.3s
+#destaqueProjetoImg:hover
+    transform:scale(1.05)
+    cursor:pointer
 #textoProjeto
     box-sizing:border-box
     width:50%
@@ -637,8 +650,37 @@ aside a
 #comentarioArea label
     display:none
 .centro
-    margin:auto
+    margin:auto !important
     display:block
     width:300px
 
+#navMenu
+    width:100%
+    margin:0
+    background-color:#fff
+    display:flex
+    justify-content:space-between
+    border-bottom:1px solid #DC367F
+    box-sizing:border-box
+#navMenu h1
+    margin:0 auto
+    color:#A50249
+    font-family: 'Courgette', cursive
+    font-size:42px
+    text-align:center
+#navMenu li
+    color: #A50249
+    padding: 0 20px
+    cursor: pointer
+    transition:.3s
+#navMenu li:hover
+    background-color:#A50249
+    color:#fff
+#navMenu a 
+    margin:0
+    padding:0
+    background:0
+    animation:none
+#navMenu ul
+    display:flex
     

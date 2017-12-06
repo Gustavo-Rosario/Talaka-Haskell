@@ -1,7 +1,7 @@
 <div #fundoProjeto>
     <div #coverProjeto style="background-image:url(@{StaticR projetoCover})">
     <div #bgPreto>
-    <a href=@{HomeR}>
+    <a href=@{ExploreR}>
         <div #voltar>
             <i .material-icons>
                 arrow_back

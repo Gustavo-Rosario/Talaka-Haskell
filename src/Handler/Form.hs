@@ -77,3 +77,8 @@ formSearch = renderDivs $ (,)
     <$> areq textField "Busca" Nothing
     <*> areq hiddenField "" (Just "alo")
 
+--Financiamento
+formFinancing :: Form(Int, Text)
+formFinancing = renderDivs $ (,)
+    <$> areq intField "Valor de Financiamento" Nothing
+    <*> areq hiddenField "" (Just "alo")
