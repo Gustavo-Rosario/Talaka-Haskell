@@ -23,12 +23,9 @@
         <p>
             #{dateFormatMonth $ show $ userDateBirth user}
     <div #menuUser>
-        <ul>
-            <li>
+        <div #criado>
+            <h1>
                 Projetos Criados
-            <li>
-                Projetos Financiados
-        <div #financiado>
             <ul .listaProjetos>
                 
                 $forall (Entity projId project) <- userProjs
@@ -55,7 +52,9 @@
                                     <span .hide-on-small-only>
                                         Ver Projeto
         
-        <div #apoiado>
+        <div #financiado>
+            <h1>
+                    Projetos Financiados
             <ul .listaProjetos>
                 <li>
                     <div .cadaFoto>

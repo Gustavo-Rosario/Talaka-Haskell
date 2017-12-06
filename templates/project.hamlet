@@ -12,13 +12,13 @@
             <h1>
                 #{projectTitle projeto}
             <h2>
-                <span>
+                <span .tooltipped data-position=top data-delay=20 data-tooltip="Autor(a)">
                     #{userName usuario}
                 <span>
                     Aberto até #{dateFormatMonth (show $ projectDateEnd projeto)}
-                <span>
+                <span .tooltipped data-position=top data-delay=50 data-tooltip="Acumulados até o momento">
                     R$ #{projectCollected projeto}
-                <span>
+                <span .tooltipped data-position=top data-delay=50 data-tooltip="Meta Final">
                     R$ #{projectMeta projeto}
             <p>
                 #{projectDescription projeto}
@@ -33,7 +33,7 @@
                         Financiar
                     <div #btnComentar .botao .alternativo>
                         Comentarios
-        <div #barra>
+        <div #barra .tooltipped data-position=top data-delay=50 data-tooltip=#{( calcPercent (projectCollected projeto) (projectMeta projeto) )}% >
             <div #progresso style=width:#{(calcPercent (projectCollected projeto) (projectMeta projeto) )}% >
 <div #bgMenu>
     <div #close>

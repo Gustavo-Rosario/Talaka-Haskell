@@ -464,6 +464,7 @@ aside a
     box-sizing: border-box
     padding:2%
 #adminProjetos li
+    position: relative
     width:100%
     padding:1%
     box-sizing:border-box
@@ -472,14 +473,42 @@ aside a
     display: flex
     justify-content:space-between
     margin:0 0 20px 0
+#adminProjetos li .bg-img
+    z-index: -2
+    top: 0
+    left: 0
+    position: absolute
+    width: 100%
+    height: 100%
+    background-size: cover
+    background-position: center center
+    background-repeat: no-repeat
+    filter:blur(2px)
+#adminProjetos li .bg-color
+    z-index: -1
+    top: 0
+    left: 0
+    position: absolute
+    width: 100%
+    height: 100%
+    background-size: cover
+    background-color:rgba(0,0,0,.5)
+    background: -moz-linear-gradient(top, rgba(165,2,73,0.5) 0%, rgba(19,105,161,0.5) 100%)
+    background: -webkit-linear-gradient(top, rgba(165,2,73,0.5) 0%,rgba(19,105,161,0.5) 100%)
+    background: linear-gradient(to bottom, rgba(165,2,73,0.5) 0%,rgba(19,105,161,0.5) 100%)
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40a50249', endColorstr='#401369a1',GradientType=0 )
 #adminProjetos li p
     font-size:20px
     font-weight: 500
+    color: #fff
+    text-shadow: 0 0 5px #fff;
 #adminProjetos li p b
     display: block
     font-weight: 400
+    color: #fff
+    text-shadow: 0 0 5px #fff;
 #adminProjetos li:hover
-    border-color:#5295C1
+    border-color: #5295C1
 #adminProjetos .opcoes
     font-size: 20px
     display: flex
@@ -494,7 +523,10 @@ aside a
     margin:0 2%
     transition:.3s
     cursor:pointer
-    color:#3A0E85
+    color: #fff
+#adminProjetos button
+    background: transparent
+    border: 0
 #adminProjetos i:hover
     transform:scale(1.05)
     color:#D50E65
@@ -706,3 +738,12 @@ aside a
     animation:none
 #navMenu ul
     display:flex
+#financiado h1, #criado h1
+    margin: 0 0 10px 0;
+    padding: 2%;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #1369A1;
+    display: block;
+    width: 100%;
+    font-size: 20px;

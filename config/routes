@@ -29,4 +29,4 @@
 
 -- Admin
 /talaka/admin/dash                              AdminR      GET
-
+/admin/project/#ProjectId/approved                         ProjectAprrovedR POST

@@ -85,3 +85,9 @@ formFinancing = renderDivs $ (,)
     where
         payMethods :: [(Text,Text)]
         payMethods = [("Boleto", "boleto"), ("Cartao de Credito", "credit_card")]
+
+-- Aprovar
+formApproved :: Form(Text, Text)
+formApproved = renderDivs $ (,)
+    <$> areq hiddenField "" (Just "admin")
+    <*> areq hiddenField "" (Just "talaka")

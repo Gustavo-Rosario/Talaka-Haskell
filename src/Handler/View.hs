@@ -33,7 +33,7 @@ getHomeR = do
 --             Just (Entity userId _) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ user) ] []
 --             defaultLayout $ do
 --                 setTitle "Talaka Pocket - Plataforma de Financiamento para Quadrinhos"
---                 addStylesheet $ StaticR css_bootstrap_css
+--                 addStylesheet $ StaticR css_bootstrap_ctss
 --                 $(whamletFile "templates/indexUser.hamlet")
 --         Just 2 -> do
 --             defaultLayout $ do
