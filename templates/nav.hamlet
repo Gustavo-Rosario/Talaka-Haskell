@@ -4,21 +4,32 @@
             <a href=@{ExploreR}>
                 <li>
                     Explorar
-            <a href=@{CadProjR}>
-                <li>
-                    Inicie um Projeto
-    
+            $maybe nivel <- logged
+                $case nivel
+                    $of 1
+                        <a href=@{CadProjR}>
+                            <li>
+                                Inicie um Projeto
+                    $of 2
+                        <a href=@{AdminR}>
+                            <li>
+                                Dashboard
     <div .centro>
         <a href=@{HomeR}>
             <h1>
                 talaka
     
     <div .direita>
-        $maybe _ <- logged
+        $maybe nivel <- logged
             <ul>
-                <a href=@{MeuPerfilR}>
-                    <li>
-                        Meu Perfil
+                $case nivel
+                    $of 1
+                        <a href=@{MeuPerfilR}>
+                            <li>
+                                Meu Perfil
+                    $of 2
+                        <li>
+                            Ola Admin
                 <li>
                     <form action=@{LogoutR} method=post >
                         <button type=submit #deslogar>
