@@ -1,6 +1,12 @@
 <div #fundoProjeto>
     <div #coverProjeto style="background-image:url(@{StaticR projetoCover})">
     <div #bgPreto>
+    $case (projectApproved projeto)
+        $of 0 
+            <span .badge-approved>
+                Em Aprovação
+        $of 1
+            <span>
     <a href=@{ExploreR}>
         <div #voltar>
             <i .material-icons>

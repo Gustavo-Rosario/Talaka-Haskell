@@ -79,7 +79,22 @@ getPerfilProjectR projectId = do
                     defaultLayout $ do
                         setTitle "Talaka Pocket - Página de Campanha"
                         $(whamletFile "templates/project.hamlet")
-                Just 1 -> redirect ExploreR
+                Just 1 -> do
+                    case mProj of
+                        Just _ -> do
+                            usuario <- runDB $ get404 $ projectCreator projeto
+                            userImg <- return $ StaticRoute ["img", "users", fromJust(userImg usuario)] []
+                            projetoDes <- return $ StaticRoute ["img", "proj", fromJust(projectDes projeto )] []
+                            projetoCover <- return $ StaticRoute ["img", "proj", fromJust(projectCover projeto)] []
+                            comentarios <- runDB $ selectList [CommentProject ==. projectId] [Desc CommentDateTime]
+                            comenuser <- sequence $ map (\ x -> (runDB $ get404 $ commentUser . entityVal $ x) >>= \y -> return (entityVal x,y)) comentarios
+                            (widget, enctype) <- generateFormPost $ formComment projectId 
+                            (wid, enc) <- generateFormPost formFinancing
+                            defaultLayout $ do
+                                setTitle "Talaka Pocket - Página de Campanha"
+                                $(whamletFile "templates/project.hamlet")
+                        Nothing -> redirect ExploreR
+                Nothing -> redirect ExploreR
         _ -> do
             usuario <- runDB $ get404 $ projectCreator projeto
             userImg <- return $ StaticRoute ["img", "users", fromJust(userImg usuario)] []
