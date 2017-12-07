@@ -23,8 +23,8 @@ getAdminR = do
         -- $(whamletFile "templates/home.hamlet")
         $(whamletFile "templates/dash.hamlet")
 
-postProjectAprrovedR :: ProjectId -> Handler Html
-postProjectAprrovedR projId = do 
+postProjectApprovedR :: ProjectId -> Handler Html
+postProjectApprovedR projId = do 
     _ <- runDB $ get404 projId
     ((result, _), _) <- runFormPost formApproved
     case result of

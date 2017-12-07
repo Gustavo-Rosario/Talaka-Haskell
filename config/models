@@ -26,13 +26,13 @@ User json
     img             Text Maybe default='perfil.jpg'
     cover           Text Maybe default='cover.jpg'
     dateBirth       Day
-    deriving Show Read
+    deriving Show
     
 Admin json
     name            Text
     login           Text
     pwd             Text
-    deriving Show Read
+    deriving Show
     
 Project json 
     title           Text
@@ -45,7 +45,7 @@ Project json
     des             Text Maybe default='capaProjeto.jpg'
     cover           Text Maybe default='fundoprojeto.jpg'
     approved        Int default=0
-    deriving Show Read
+    deriving Show
 
 
 Comment json
@@ -54,7 +54,7 @@ Comment json
     project         ProjectId
     dateTime        UTCTime
     report          Int
-    deriving Show Read
+    deriving Show
     
 Financing json
     user            UserId
@@ -62,4 +62,4 @@ Financing json
     vlFinancing     Int
     dateFinancing   Day
     type            Text
-    deriving Show Read
+    deriving Show

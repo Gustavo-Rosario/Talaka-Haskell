@@ -12,7 +12,6 @@ import Database.Persist.Postgresql
 import Handler.Utils
 import qualified Prelude as P
 
-
 getHomeR :: Handler Html
 getHomeR = do
     logged <- isLogged

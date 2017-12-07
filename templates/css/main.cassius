@@ -322,7 +322,8 @@ footer p
     margin:auto
     flex-wrap: wrap;
     position:relative
-    min-height:300px
+    justify-content:space-between
+    
 #buscar
     margin:auto
     display:block
@@ -747,3 +748,9 @@ aside a
     display: block;
     width: 100%;
     font-size: 20px;
+#financiado li, #criado li
+    width:30%
+    box-sizing:border-box
+    margin:2%
+
+    

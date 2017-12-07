@@ -71,6 +71,8 @@ getPerfilUserR userid = do
     userImg <- return $ StaticRoute ["img","users", fromJust(userImg user)] []
     userCover <- return $ StaticRoute ["img","covers", fromJust(userCover user)] []
     userProjs <- runDB $ selectList [ProjectCreator ==. userid] [Desc ProjectId]
+    finances <- selectDiferentProject userid
+    userFins <- sequence $ map (\(Entity fid fin) -> (runDB $ get404 (financingProject fin)) >>= \project -> (runDB $ get404 (projectCreator project) )>>= \creator -> return (project, creator, (financingProject fin)) ) finances
     -- Criar a imagem da fora para poder usar dentro do template.
     -- o Static Route é uma coisa pura, e como estamos dentro da Handler, temos que trocar.
     defaultLayout $ do
@@ -87,6 +89,8 @@ getMeuPerfilR = do
     userImg <- return $ StaticRoute ["img","users", fromJust(userImg user)] []
     userCover <- return $ StaticRoute ["img","covers", fromJust(userCover user)] []
     userProjs <- runDB $ selectList [ProjectCreator ==. userId] [Desc ProjectId]
+    finances <- selectDiferentProject userId
+    userFins <- sequence $ map (\fin -> (runDB $ get404 (financingProject . entityVal $ fin)) >>= \project -> (runDB $ get404 (projectCreator project)) >>= \creator -> return (project, creator, (financingProject . entityVal $ fin)) ) finances
     -- Criar a imagem da fora para poder usar dentro do template.
     -- o Static Route é uma coisa pura, e como estamos dentro da Handler, temos que trocar.
     defaultLayout $ do
@@ -94,3 +98,8 @@ getMeuPerfilR = do
         $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/perfil.hamlet")
         $(whamletFile "templates/footer.hamlet")
+        
+
+selectDiferentProject :: UserId -> Handler [Entity Financing]
+selectDiferentProject uid = runDB $ rawSql "SELECT ?? FROM financing WHERE financing.user = ?  GROUP BY financing.project, financing.id" [ toPersistValue uid ]
+-- DISTINCT

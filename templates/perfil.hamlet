@@ -53,27 +53,29 @@
                                         Ver Projeto
         
         <div #financiado>
+        $forall (project, creator, projId) <- userFins
             <h1>
                     Projetos Financiados
             <ul .listaProjetos>
                 <li>
-                    <div .cadaFoto>
+                    <div .cadaFoto style=background-image:url(@{StaticR (getImgStatic ["img","proj"] ( fromJust $ projectDes project)) }>
                     <h3>
-                        titulo do projeto
+                        #{ projectTitle project}
                     <h4>
-                        nome do usuario
+                        #{ userName creator}
                     <p>
-                        descricao do projeto
+                        #{ projectDescription project}
                     
                         <div .footer>
                             <p .metas>
                                 <span .metaAtual>
                                     Valor acumulado <br>
-                                    R$ 000
+                                    R$ #{ projectCollected project}
                                 <span .metaFinal>
                                     Meta Final <br>
-                                    R$ 000
-                            <a .btn .btn-primary  .linkProjeto>
-                                <i .material-icons>
-                                    remove_red_eye
-                                Ver Projeto
+                                    R$ #{ projectMeta project}
+                            <a href=@{PerfilProjectR projId} .btn .btn-primary .pink .darken-3 .linkProjeto>
+                                    <i .material-icons>
+                                        remove_red_eye
+                                    <span .hide-on-small-only>
+                                        Ver Projeto

@@ -29,7 +29,7 @@
                         <a href=@{PerfilProjectR projId}>
                             <i .material-icons>
                                 remove_red_eye
-                        <form action=@{ProjectAprrovedR projId} method=post enctype=#{enctype}>
+                        <form action=@{ProjectApprovedR projId} method=post enctype=#{enctype}>
                             ^{widget}
                             <button type=submit>
                                 <i .material-icons>
