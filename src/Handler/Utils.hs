@@ -33,18 +33,44 @@ dateFormatMonth (y1:y2:y3:y4:_:'1':'2':_:d1:d2:[]) = [d1,d2]++" de Dezembro de "
 getImgStatic :: [Text] -> Text -> Route Static
 getImgStatic path fileName = StaticRoute (path++[fileName]) []
 
-isLogged :: Handler (Maybe Int)
+isLogged :: Handler (Maybe Int, Maybe UserId)
 isLogged = do 
-    session <- lookupSession "_USER"
+    session <- lookupSession "_USERID"
     case session of 
         Nothing -> do
             admin <- lookupSession "_ADMIN"
             case admin of
-                Nothing -> return Nothing
-                Just _ -> return (Just 2)
-        Just _ -> return (Just 1)
+                Nothing -> return (Nothing,Nothing)
+                Just _ -> return (Just 2, Nothing)
+        Just _ -> do
+            Just(Entity userId user) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ fromJust(session)) ] []
+            return (Just 1, Just userId)
 
 calcPercent :: Int -> Int -> Float
 calcPercent x y =  100 * ( a / b )
   where a = fromIntegral x :: Float
         b = fromIntegral y :: Float
+
+isAuthor :: ProjectId -> UserId -> Handler (Maybe Int)
+isAuthor pid uid = do
+    mProj <- runDB $ selectFirst [ProjectId ==. pid, ProjectCreator ==. uid] []
+    case mProj of
+        Just _ -> do
+            return (Just 1)
+        Nothing -> return Nothing
+
+isLoggedAuthor :: ProjectId -> Handler (Maybe Int, Maybe UserId, Maybe (Entity Project))
+isLoggedAuthor pid = do 
+    session <- lookupSession "_USERID"
+    case session of 
+        Nothing -> do
+            admin <- lookupSession "_ADMIN"
+            case admin of
+                Nothing -> return (Nothing,Nothing,Nothing)
+                Just _ -> return (Just 2, Nothing,Nothing)
+        Just _ -> do
+            Just(Entity userId user) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ fromJust(session)) ] []
+            mProj <- runDB $ selectFirst [ProjectId ==. pid, ProjectCreator ==. userId] []
+            return (Just 1, Just userId, mProj)
+
+    

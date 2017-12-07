@@ -16,7 +16,7 @@ import qualified Prelude as P
 
 getCadProjR :: Handler Html
 getCadProjR = do
-    logged <- isLogged
+    (logged, mUser) <- isLogged
     (Just user) <- lookupSession "_USERID"
     Just (Entity userId _) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ user) ] []
     (widget, enctype) <- generateFormPost (formProject userId)
@@ -64,7 +64,7 @@ postCadProjImgsR projectid = do
         
 getPerfilProjectR :: ProjectId -> Handler Html
 getPerfilProjectR projectId = do
-    logged <- isLogged
+    (logged, mUser, mProj) <- isLoggedAuthor projectId
     projeto <- runDB $ get404 projectId
     usuario <- runDB $ get404 $ projectCreator projeto
     userImg <- return $ StaticRoute ["img", "users", fromJust(userImg usuario)] []

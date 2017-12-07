@@ -66,7 +66,7 @@ postCadUserImgsR userid = do
 --     sendStatusJSON noContent204 (object ["resp" .= serieid])
 getPerfilUserR :: UserId -> Handler Html
 getPerfilUserR userid = do
-    logged <- isLogged
+    (logged,_) <- isLogged
     user <- runDB $ get404 userid
     userImg <- return $ StaticRoute ["img","users", fromJust(userImg user)] []
     userCover <- return $ StaticRoute ["img","covers", fromJust(userCover user)] []
@@ -83,7 +83,7 @@ getPerfilUserR userid = do
         
 getMeuPerfilR :: Handler Html
 getMeuPerfilR = do
-    logged <- isLogged
+    (logged,_) <- isLogged
     (Just user) <- lookupSession "_USERID"
     Just (Entity userId user) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ user) ] []
     userImg <- return $ StaticRoute ["img","users", fromJust(userImg user)] []

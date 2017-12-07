@@ -26,8 +26,13 @@
                 $maybe nivel <- logged
                     $case nivel
                         $of 1
-                            <div #btnFinanciar .botao .principal>
-                                Financiar
+                            $maybe userId <- mUser
+                                $maybe _ <- mProj
+                                    <div .botao .principal>
+                                        Autor(a)
+                                $nothing
+                                    <div #btnFinanciar .botao .principal>
+                                        Financiar
                         $of 2
                             <div .botao .principal .tooltipped data-position=top data-delay=50 data-tooltip="Admin nao Financia">
                                 ADMIN

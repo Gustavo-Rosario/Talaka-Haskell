@@ -14,7 +14,7 @@ import qualified Prelude as P
 
 getHomeR :: Handler Html
 getHomeR = do
-    logged <- isLogged
+    (logged, _) <- isLogged
     defaultLayout $ do
         setTitle "Talaka Pocket - Plataforma de Financiamento para Quadrinhos"
         addStylesheet $ StaticR css_bootstrap_css
