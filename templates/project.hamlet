@@ -8,6 +8,8 @@
     <div #informacoesProjeto>
         <div #destaqueProjeto>
             <div #destaqueProjetoImg style="background-image:url(@{StaticR projetoDes})">
+                <a href=@{PerfilUserR (projectCreator projeto)} >    
+                    <div #destaqueFotoAutor style="background-image:url(@{StaticR userImg})" .tooltipped data-position=top data-delay=50 data-tooltip=#{userName usuario}>
         <div #textoProjeto>
             <h1>
                 #{projectTitle projeto}

@@ -18,8 +18,9 @@
             <div .cadaFoto style=background-image:url(@{StaticR (getImgStatic ["img","proj"] ( fromJust $ projectDes project)) }>
             <h3>
                 #{projectTitle project} 
-            <h4>
-                #{ userName creator}
+            <h4 .tooltipped data-position=top data-delay=50 data-tooltip="Ver Autor(a)">
+                <a href=@{PerfilUserR (projectCreator project)}>
+                    #{ userName creator}
             <p>
                 #{projectDescription project}
             
