@@ -189,8 +189,11 @@ body
     box-sizing:border-box
 
 #menuUser ul
-    margin:0
-    display:flex
+    margin: 0
+    padding: 0
+    width: 100%
+    display: flex
+    flex-wrap: wrap
     
 #menuUser li
     width: 50%
@@ -749,7 +752,7 @@ aside a
     width: 100%;
     font-size: 20px;
 #financiado li, #criado li
-    width:30%
+    width:40%
     box-sizing:border-box
     margin:2%
 

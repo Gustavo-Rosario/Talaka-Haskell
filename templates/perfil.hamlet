@@ -27,7 +27,6 @@
             <h1>
                 Projetos Criados
             <ul .listaProjetos>
-                
                 $forall (Entity projId project) <- userProjs
                     <li>
                         <div .cadaFoto style=background-image:url(@{StaticR (getImgStatic ["img","proj"] ( fromJust $ projectDes project)) }>
@@ -53,29 +52,29 @@
                                         Ver Projeto
         
         <div #financiado>
-        $forall (project, creator, projId) <- userFins
             <h1>
-                    Projetos Financiados
+                Projetos Financiados
             <ul .listaProjetos>
-                <li>
-                    <div .cadaFoto style=background-image:url(@{StaticR (getImgStatic ["img","proj"] ( fromJust $ projectDes project)) }>
-                    <h3>
-                        #{ projectTitle project}
-                    <h4>
-                        #{ userName creator}
-                    <p>
-                        #{ projectDescription project}
-                    
-                        <div .footer>
-                            <p .metas>
-                                <span .metaAtual>
-                                    Valor acumulado <br>
-                                    R$ #{ projectCollected project}
-                                <span .metaFinal>
-                                    Meta Final <br>
-                                    R$ #{ projectMeta project}
-                            <a href=@{PerfilProjectR projId} .btn .btn-primary .pink .darken-3 .linkProjeto>
-                                    <i .material-icons>
-                                        remove_red_eye
-                                    <span .hide-on-small-only>
-                                        Ver Projeto
+                $forall (project, creator, projId) <- userFins
+                    <li>
+                        <div .cadaFoto style=background-image:url(@{StaticR (getImgStatic ["img","proj"] ( fromJust $ projectDes project)) }>
+                        <h3>
+                            #{ projectTitle project}
+                        <h4>
+                            #{ userName creator}
+                        <p>
+                            #{ projectDescription project}
+                        
+                            <div .footer>
+                                <p .metas>
+                                    <span .metaAtual>
+                                        Valor acumulado <br>
+                                        R$ #{ projectCollected project}
+                                    <span .metaFinal>
+                                        Meta Final <br>
+                                        R$ #{ projectMeta project}
+                                <a href=@{PerfilProjectR projId} .btn .btn-primary .pink .darken-3 .linkProjeto>
+                                        <i .material-icons>
+                                            remove_red_eye
+                                        <span .hide-on-small-only>
+                                            Ver Projeto
