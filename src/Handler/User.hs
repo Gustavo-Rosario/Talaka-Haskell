@@ -74,6 +74,24 @@ getPerfilUserR userid = do
         $(whamletFile "templates/perfil.hamlet")
         $(whamletFile "templates/footer.hamlet")
         
+-- getMeuPerfilR :: Handler Html
+-- getMeuPerfilR = do
+--     (logged,_) <- isLogged
+--     (Just user) <- lookupSession "_USERID"
+--     Just (Entity userId user) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ user) ] []
+--     userImg <- return $ StaticRoute ["img","users", fromJust(userImg user)] []
+--     userCover <- return $ StaticRoute ["img","covers", fromJust(userCover user)] []
+--     userProjs <- runDB $ selectList [ProjectCreator ==. userId] [Desc ProjectId]
+--     finances <- selectDiferentProject userId
+--     userFins <- sequence $ map (\fin -> (runDB $ get404 (financingProject . entityVal $ fin)) >>= \project -> (runDB $ get404 (projectCreator project)) >>= \creator -> return (project, creator, (financingProject . entityVal $ fin)) ) finances
+--     -- Criar a imagem da fora para poder usar dentro do template.
+--     -- o Static Route é uma coisa pura, e como estamos dentro da Handler, temos que trocar.
+--     defaultLayout $ do
+--         setTitle "Talaka Pocket - Perfil de Usuário"
+--         $(whamletFile "templates/nav.hamlet")
+--         $(whamletFile "templates/perfil.hamlet")
+--         $(whamletFile "templates/footer.hamlet")
+
 getMeuPerfilR :: Handler Html
 getMeuPerfilR = do
     (logged,_) <- isLogged
@@ -82,17 +100,18 @@ getMeuPerfilR = do
     userImg <- return $ StaticRoute ["img","users", fromJust(userImg user)] []
     userCover <- return $ StaticRoute ["img","covers", fromJust(userCover user)] []
     userProjs <- runDB $ selectList [ProjectCreator ==. userId] [Desc ProjectId]
-    finances <- selectDiferentProject userId
-    userFins <- sequence $ map (\fin -> (runDB $ get404 (financingProject . entityVal $ fin)) >>= \project -> (runDB $ get404 (projectCreator project)) >>= \creator -> return (project, creator, (financingProject . entityVal $ fin)) ) finances
+    finances <- selectDistinctProject userId
+    userFins <- sequence $ map (\fin -> (runDB $ get404 fin) >>= \project -> (runDB $ get404 (projectCreator project)) >>= \creator -> return (project, creator, fin) ) finances
     -- Criar a imagem da fora para poder usar dentro do template.
     -- o Static Route é uma coisa pura, e como estamos dentro da Handler, temos que trocar.
     defaultLayout $ do
         setTitle "Talaka Pocket - Perfil de Usuário"
         $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/perfil.hamlet")
-        $(whamletFile "templates/footer.hamlet")
-        
+        $(whamletFile "templates/footer.hamlet")        
 
 selectDiferentProject :: UserId -> Handler [Entity Financing]
 selectDiferentProject uid = runDB $ rawSql "SELECT ?? FROM financing WHERE financing.user = ?  GROUP BY financing.project, financing.id" [ toPersistValue uid ]
 -- DISTINCT
+selectDistinctProject :: UserId -> Handler [ProjectId]
+selectDistinctProject uid = runDB $ rawSql "SELECT DISTINCT( financing.project ) FROM financing WHERE financing.user = ?  ORDER BY financing.project DESC" [ toPersistValue uid ]

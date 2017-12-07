@@ -8,8 +8,9 @@
             Voltar à Página Inicial
         <a href=@{ExploreR}>
             Explorar projetos
-        <a href=@{LogoutR} .botao .principalAlt>
-            Deslogar
+        <form action=@{LogoutR} method=post>    
+            <button type=submit .botao .principalAlt>
+                Deslogar
             
     <div #aprojetos>
         <h1>
