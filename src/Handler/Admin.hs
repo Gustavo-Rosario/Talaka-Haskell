@@ -20,7 +20,6 @@ getAdminR = do
     (widget, enctype) <- generateFormPost formApproved
     defaultLayout $ do
         setTitle "Talaka Pocket - Dashboard"
-        -- $(whamletFile "templates/home.hamlet")
         $(whamletFile "templates/dash.hamlet")
 
 postProjectApprovedR :: ProjectId -> Handler Html

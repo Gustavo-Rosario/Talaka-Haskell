@@ -62,38 +62,3 @@ postLogoutR = do
         Nothing -> do
             deleteSession "_ADMIN"
     redirect HomeR
-
--- postLoginR :: Handler Html
--- postLoginR = do
---     ((res,_),_) <- runFormPost formLogin
---     case res of
---         FormSuccess ("root@root.com","root") -> do 
---             setSession "_USR" (pack (show $ Adm "admin" "" "" ""))
---             redirect AdminR
---         FormSuccess (email,senha) -> do
---             talvezUsuario <- autenticar email senha
---             case talvezUsuario of
---                 Nothing -> do
---                     setMessage [shamlet|
---                         <h1>
---                             Usuario nao cadastrado/Senha invalida
---                     |]
---                     redirect LoginR
---                 Just (Entity uid (User n l e _ b i co d)) -> do
---                     setSession "_USR" (pack (show $ User n l e "" b i co d))
---                     redirect (PerfilUserR uid)
---         _ -> redirect HomeR
-                        
-                        
--- postLogoutR :: Handler Html
--- postLogoutR = do 
---     deleteSession "_USR"
---     redirect HomeR
-
--- getAdminR :: Handler Html 
--- getAdminR = do 
---     defaultLayout [whamlet|
---         <h1> BEM VINDO ADMIN!
---         <form action=@{LogoutR} method=post>
---             <input type="submit" value="Logout">
---     |]

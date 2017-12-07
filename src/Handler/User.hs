@@ -19,7 +19,6 @@ getCadUserR = do
     (widget, enctype) <- generateFormPost formUser
     defaultLayout $ do
         setTitle "Talaka Pocket - Cadastro de Usuário"
-        -- $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/caduser.hamlet")
 
 postCadUserR :: Handler Html
@@ -36,7 +35,6 @@ getCadUserImgsR userid = do
     (widget, enctype) <- generateFormPost formImgs
     defaultLayout $ do
         setTitle "Talaka Pocket - Imagens Perfil"
-        -- $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/img.hamlet")
         
 postCadUserImgsR :: UserId -> Handler Html
@@ -59,11 +57,6 @@ postCadUserImgsR userid = do
             |]
             redirect (CadUserImgsR userid)
 
--- patchAlterarNomeR :: SerieId -> Text -> Handler Value
--- patchAlterarNomeR serieid nome = do
---     _ <- runDB $ get404 serieid
---     runDB $ update serieid [SerieNome =. nome]
---     sendStatusJSON noContent204 (object ["resp" .= serieid])
 getPerfilUserR :: UserId -> Handler Html
 getPerfilUserR userid = do
     (logged,_) <- isLogged

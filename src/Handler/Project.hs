@@ -41,7 +41,6 @@ getCadProjImgsR projectid = do
     (widget, enctype) <- generateFormPost formProjectImg
     defaultLayout $ do
         setTitle "Talaka Pocket - Imagens do Projeto"
-        -- $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/projImg.hamlet")
         
 postCadProjImgsR :: ProjectId -> Handler Html
@@ -50,7 +49,6 @@ postCadProjImgsR projectid = do
     ((result,_),_) <- runFormPost formProjectImg
     case result of
         FormSuccess (destaque, cover) -> do
-            --liftIO $ fileMove perfil ("static/img/users/" ++ (unpack $ fileName perfil))
             liftIO $ fileMove destaque ("static/img/proj/" ++ (unpack $ fileName destaque))
             liftIO $ fileMove cover ("static/img/proj/" ++ (unpack $ fileName cover))
             runDB $ update projectid [ProjectDes =. (Just (fileName destaque)), ProjectCover =. (Just (fileName cover))]
@@ -76,20 +74,8 @@ getPerfilProjectR projectId = do
     (wid, enc) <- generateFormPost formFinancing
     defaultLayout $ do
         setTitle "Talaka Pocket - Página de Campanha"
-        -- $(whamletFile "templates/nav.hamlet")
         $(whamletFile "templates/project.hamlet")
         
--- Listar Projetos        
--- getListProjR :: Handler Html
--- getListProjR = do
---     projects <- runDB $ selectList [] [Desc ProjectDateBegin]
---     projcreator <- sequence $ map (\proj -> (runDB $ get404 $ projectCreator . entityVal $ proj) >>= \creator -> return (entityVal proj, creator, entityKey proj) ) projects
---     defaultLayout $ do
---         setTitle "Talaka Pocket - Lista de Projetos"
---         $(whamletFile "templates/listaprojetos.hamlet")
---         $(whamletFile "templates/footer.hamlet")
-        
-
 postApagarProjR :: ProjectId -> Handler Html
 postApagarProjR projectId = do
     _ <- runDB $ get404 projectId
@@ -121,5 +107,3 @@ postFinanciarR projId = do
             |]
             redirect (PerfilProjectR projId)
 
--- getby
--- <-. maybe like

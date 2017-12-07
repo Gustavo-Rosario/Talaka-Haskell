@@ -1,22 +1,3 @@
-Serie json
-    nome    Text
-    genero  Text
-    qtTemp  Int
-    ano     Int
-    deriving Show
-
-Cliente json
-    nome    Text
-    cpf     Text
-    email   Text
-    UniqueField email cpf
-    deriving Show
-    
-ClienteSerie
-    serieid SerieId
-    clienteid ClienteId
-    deriving Show
-
 User json
     name            Text
     login           Text
@@ -46,7 +27,6 @@ Project json
     cover           Text Maybe default='fundoprojeto.jpg'
     approved        Int default=0
     deriving Show
-
 
 Comment json
     comment         Textarea
