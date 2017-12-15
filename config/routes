@@ -18,7 +18,7 @@
 /projeto/#ProjectId/apagar                      ApagarProjR     POST
 !/projeto/#ProjectId                            PerfilProjectR  GET
 /comentar/#ProjectId                            ComentarProjectR POST
- 
+/project/#ProjectId                             ProjectR        GET
 
 -- Busca
 /explore                                        ExploreR        GET
@@ -32,4 +32,4 @@
 
 -- Admin
 /talaka/admin/dash                              AdminR      GET
-/admin/project/#ProjectId/approved                         ProjectApprovedR POST
+/admin/project/#ProjectId/approved              ProjectApprovedR POST

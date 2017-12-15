@@ -9,6 +9,8 @@ module Handler.Form where
 import Import
 import Database.Persist.Postgresql
 -- FORMULARIOS
+
+-- Comentario
 formComment :: ProjectId -> Form Comment
 formComment pId = renderDivs $ Comment
     <$> areq textareaField "Comentario: " Nothing
@@ -16,7 +18,7 @@ formComment pId = renderDivs $ Comment
     <*> pure(pId)
     <*> lift( liftIO getCurrentTime)
     <*> areq hiddenField "" (Just 0)
-
+-- Cad Projeto
 formProject :: UserId -> Form Project
 formProject userid = renderDivs $ Project
     <$> areq textField "Título: " Nothing

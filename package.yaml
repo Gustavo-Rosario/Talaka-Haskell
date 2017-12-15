@@ -47,6 +47,10 @@ dependencies:
 - wai
 - http-types
 - old-locale
+- http-client
+- wreq >=0.5.0.1
+- lens
+- lens-aeson
 
 # The library contains all of our application code. The executable
 # defined below is just a thin wrapper.

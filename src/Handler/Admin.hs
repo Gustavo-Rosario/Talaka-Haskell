@@ -7,7 +7,7 @@
 module Handler.Admin where
 
 import Import
-import Text.Cassius
+import Text.Cassius()
 import Database.Persist.Postgresql
 import Handler.Form
 import Data.Maybe
@@ -27,7 +27,7 @@ postProjectApprovedR projId = do
     _ <- runDB $ get404 projId
     ((result, _), _) <- runFormPost formApproved
     case result of
-        FormSuccess (admin, talaka) -> do
+        FormSuccess (_, _) -> do
             runDB $ update projId [ProjectApproved =. 1]
             redirect AdminR
         _ -> do

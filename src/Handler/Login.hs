@@ -7,7 +7,7 @@
 module Handler.Login where
 
 import Import
-import Text.Cassius
+import Text.Cassius()
 import Database.Persist.Postgresql
 import Handler.Form
         
@@ -37,9 +37,9 @@ postLoginR = do
                             Usuario não cadastrado / Senha inválida
                     |]
                     redirect LoginR
-                Just(Entity userId (User name login email _ bio img cover date)) -> do
-                    setSession "_USER" (pack (show $ User name login email "" bio img cover date))
-                    setSession "_USERID" (pack (show userId))
+                Just(Entity userId (User name loginU email _ bio img cover date)) -> do
+                    setSession "_USER" (pack (show $ User name loginU email "" bio img cover date))
+                    setSession "_USERID" (pack (show $ fromSqlKey userId))
                     redirect (PerfilUserR userId)
         _ -> do
             setMessage [shamlet|

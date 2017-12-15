@@ -8,8 +8,8 @@ module Handler.Utils where
 
 import Import
 import Data.Maybe
-import Data.Time
-import Database.Persist.Postgresql
+import Data.Time()
+import Database.Persist.Postgresql(toSqlKey, fromSqlKey)
 import qualified Prelude as P
 
 
@@ -43,7 +43,7 @@ isLogged = do
                 Nothing -> return (Nothing,Nothing)
                 Just _ -> return (Just 2, Nothing)
         Just _ -> do
-            Just(Entity userId user) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ fromJust(session)) ] []
+            Just(Entity userId user) <- runDB $ selectFirst [UserId ==. (toSqlKey . P.read . unpack $ fromJust(session)) ] []
             return (Just 1, Just userId)
 
 calcPercent :: Int -> Int -> Float
@@ -69,7 +69,7 @@ isLoggedAuthor pid = do
                 Nothing -> return (Nothing,Nothing,Nothing)
                 Just _ -> return (Just 2, Nothing,Nothing)
         Just _ -> do
-            Just(Entity userId user) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ fromJust(session)) ] []
+            Just(Entity userId user) <- runDB $ selectFirst [UserId ==. (  toSqlKey . P.read . unpack $ fromJust(session)) ] []
             mProj <- runDB $ selectFirst [ProjectId ==. pid, ProjectCreator ==. userId] []
             return (Just 1, Just userId, mProj)
 

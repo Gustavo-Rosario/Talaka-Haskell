@@ -77,7 +77,7 @@
         $maybe nivel <- logged
             $case nivel
                 $of 1
-                    <form action=@{ComentarProjectR projectId} method=post enctype=#{enctype}>
+                    <form #comentario action=@{ComentarProjectR projectId} method=post enctype=#{enctype}>
                         ^{widget}
                         <input type=submit value=Comentar .botao .principal>
                 $of 2

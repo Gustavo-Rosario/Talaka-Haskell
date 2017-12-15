@@ -7,7 +7,7 @@
 module Handler.Project where
 
 import Import
-import Text.Cassius
+import Text.Cassius()
 import Database.Persist.Postgresql
 import Handler.Form
 import Data.Maybe
@@ -18,7 +18,7 @@ getCadProjR :: Handler Html
 getCadProjR = do
     (logged, mUser) <- isLogged
     (Just user) <- lookupSession "_USERID"
-    Just (Entity userId _) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ user) ] []
+    userId <- return $ (P.read . unpack $ user)
     (widget, enctype) <- generateFormPost (formProject userId)
     defaultLayout $ do
         setTitle "Talaka Pocket - Cadastro Projeto"
@@ -28,7 +28,7 @@ getCadProjR = do
 postCadProjR :: Handler Html
 postCadProjR = do
     (Just user) <- lookupSession "_USERID"
-    Just (Entity userId _) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ user) ] []
+    userId <- return $ (P.read . unpack $ user) :: Handler UserId
     ((result,_),_) <- runFormPost (formProject userId) 
     case result of
         FormSuccess project -> do
@@ -78,6 +78,19 @@ getPerfilProjectR projectId = do
                     (wid, enc) <- generateFormPost formFinancing
                     defaultLayout $ do
                         setTitle "Talaka Pocket - Página de Campanha"
+                        toWidget [julius|
+                            $("#go").click(function(){
+                                let pid = parseInt($("#pid").val());
+                                $.ajax({
+                                    url: "",
+                                    type: "POST",
+                                    success: function(result) {
+                                        alert(JSON.stringify(result));
+                                    },
+                                    dataType: "json"
+                                });
+                            });
+                        |]
                         $(whamletFile "templates/project.hamlet")
                 Just 1 -> do
                     case mProj of
@@ -125,7 +138,7 @@ postFinanciarR :: ProjectId -> Handler Html
 postFinanciarR projId = do
     _ <- runDB $ get404 projId
     (Just user) <- lookupSession "_USERID"
-    Just (Entity userId _) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ user) ] []
+    userId <- return $ P.read (show user) :: Handler UserId
     ((result,_),_) <- runFormPost formFinancing
     case result of
         FormSuccess ( vlFinancing ,typeFinancing) -> do

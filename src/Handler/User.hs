@@ -48,7 +48,7 @@ postCadUserImgsR userid = do
             runDB $ update userid [UserImg =. (Just (fileName perfil)), UserCover =. (Just (fileName cover))]
             (User name login email _ bio img cover date) <- runDB $ get404 userid
             setSession "_USER" (pack(show $ User name login email "" bio img cover date))
-            setSession "_USERID" (pack(show userid))
+            setSession "_USERID" (pack(show $ fromSqlKey userid))
             redirect (PerfilUserR userid) 
         _ -> do
             setMessage [shamlet|
@@ -77,8 +77,10 @@ getPerfilUserR userid = do
 getMeuPerfilR :: Handler Html
 getMeuPerfilR = do
     (logged,_) <- isLogged
-    (Just user) <- lookupSession "_USERID"
-    Just (Entity userId user) <- runDB $ selectFirst [UserId ==. ( P.read . unpack $ user) ] []
+    (Just uid) <- lookupSession "_USERID"
+    (Just u) <- lookupSession "_USER"
+    user <- return $ P.read (show $ unpack u)  :: Handler User
+    userId <- return $ P.read (show $ unpack uid) :: Handler UserId
     userImg <- return $ StaticRoute ["img","users", fromJust(userImg user)] []
     userCover <- return $ StaticRoute ["img","covers", fromJust(userCover user)] []
     userProjs <- runDB $ selectList [ProjectCreator ==. userId] [Desc ProjectId]

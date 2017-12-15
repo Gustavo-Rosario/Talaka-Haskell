@@ -21,6 +21,23 @@ function main(){
         Materialize.toast($toastContent, 10000);
         return false;
     });
+    
+    
+    //================================== AJAX ==================================
+    $("#comentario").submit(function(event){
+        event.preventDefault();
+        console.log("ALOOOO");
+        // let pid = parseInt($("#pid").val());
+        // $.ajax({
+        //     url: "/project/"+pid,
+        //     type: "GET",
+        //     success: function(result) {
+        //         alert(JSON.stringify(result));
+        //     },
+        //     dataType: "json"
+        // });
+    });
+    
 }
 //ToolTip
 $(document).ready(function(){
