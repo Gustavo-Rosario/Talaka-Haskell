@@ -4,6 +4,8 @@
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE DeriveGeneric #-}
+
 module Handler.Utils where
 
 import Import
@@ -11,7 +13,19 @@ import Data.Maybe
 import Data.Time()
 import Database.Persist.Postgresql(toSqlKey, fromSqlKey)
 import qualified Prelude as P
+import Data.Aeson
+import GHC.Generics
 
+data JSONResponse = JSONResponse { stats :: Text, msg :: Text } deriving (Show, Generic)
+
+instance FromJSON JSONResponse where
+    parseJSON (Object v) =
+        JSONResponse <$> v .: "stats"
+                     <*> v .: "msg"
+    parseJSON _ = mzero
+
+instance ToJSON JSONResponse where
+    toJSON (JSONResponse stats msg) = object [ "stats"  .= stats, "msg"   .= msg]
 
 dateFormat :: String -> String
 dateFormat (y1:y2:y3:y4:_:m1:m2:_:d1:d2:[]) = [d1,d2,'/',m1,m2,'/',y1,y2,y3,y4]

@@ -10,10 +10,13 @@ import Import
 import Text.Cassius()
 import Database.Persist.Postgresql(toSqlKey, fromSqlKey)
 import Handler.Form
+import Handler.Utils
+import Data.Maybe(fromJust)
+import Data.Aeson (toJSON, fromJSON)
 import qualified Prelude as P
 
 
-postComentarProjectR :: ProjectId -> Handler Html
+postComentarProjectR :: ProjectId -> Handler Value
 postComentarProjectR pId = do
     session <- lookupSession "_USERID"
     case session of
@@ -23,13 +26,11 @@ postComentarProjectR pId = do
             case result of
                 FormSuccess (Comment cmt _ proj dt r) -> do
                     _ <- runDB $ insert (Comment cmt userId proj dt r) :: Handler CommentId
-                    redirect $ PerfilProjectR pId
-                _ -> redirect HomeR
-        _ -> do
-            setMessage [shamlet|
-                <h2>Voce precisa estar logado para comentar</h2>
-            |]
-            redirect $ PerfilProjectR pId
+                    (Just u) <- lookupSession "_USER"
+                    userInfo <- return $ (P.read . unpack $ u)  :: Handler User
+                    sendResponseStatus status201 $ toJSON (JSONResponse "success" (userName userInfo))
+                _ -> sendResponseStatus status203 $ toJSON (JSONResponse "fail" "Not Allow")
+        _ -> sendResponseStatus status200 $ toJSON (JSONResponse "fail" "Not Allow")
 
 -- getCommentAjaxR :: Handler Value
 -- getCommentAjaxR = do

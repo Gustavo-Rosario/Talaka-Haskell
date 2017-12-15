@@ -79,8 +79,8 @@ getMeuPerfilR = do
     (logged,_) <- isLogged
     (Just uid) <- lookupSession "_USERID"
     (Just u) <- lookupSession "_USER"
-    user <- return $ P.read (show $ unpack u)  :: Handler User
-    userId <- return $ P.read (show $ unpack uid) :: Handler UserId
+    user <- return $ (P.read . unpack $ u)  :: Handler User
+    userId <- return $ (toSqlKey . P.read . unpack $ uid) :: Handler UserId
     userImg <- return $ StaticRoute ["img","users", fromJust(userImg user)] []
     userCover <- return $ StaticRoute ["img","covers", fromJust(userCover user)] []
     userProjs <- runDB $ selectList [ProjectCreator ==. userId] [Desc ProjectId]

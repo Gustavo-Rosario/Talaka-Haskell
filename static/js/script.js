@@ -24,20 +24,66 @@ function main(){
     
     
     //================================== AJAX ==================================
+    //COMENTAR
     $("#comentario").submit(function(event){
         event.preventDefault();
-        console.log("ALOOOO");
-        // let pid = parseInt($("#pid").val());
-        // $.ajax({
-        //     url: "/project/"+pid,
-        //     type: "GET",
-        //     success: function(result) {
-        //         alert(JSON.stringify(result));
-        //     },
-        //     dataType: "json"
-        // });
+        let action = $(this).prop("action");
+        let $f = document.getElementById("comentario"); 
+        let form = new FormData($f);
+        $.ajax({
+            url: action,
+            data: form,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            method: 'POST'
+        }).done(function(response){
+            
+            if(response.stats == "success"){
+                 Materialize.toast("Comentário realizado com Sucesso", 4000);
+                 // Inserir mensagem
+                 let msg =  $("#comentario #hident2").val();
+                 $("#listaComentarios").prepend("<li><b>"+response.msg+"</b> "+msg+"</li>");
+            }else{
+                Materialize.toast("Erro ao Comentar", 4000);
+                console.log(response);
+            }
+        }).fail(function(response){
+            Materialize.toast("Erro no Servidor", 4000);
+            console.log(response);
+        });
+        return false;
     });
-    
+
+    //DELETAR COMENTARIO
+    // $("#comentario").submit(function(event){
+    //     event.preventDefault();
+    //     let action = $(this).prop("action");
+    //     let $f = document.getElementById("comentario"); 
+    //     let form = new FormData($f);
+    //     $.ajax({
+    //         url: action,
+    //         data: form,
+    //         processData: false,
+    //         contentType: false,
+    //         type: 'DELETE'
+    //     }).done(function(response){
+            
+    //         if(response.stats == "success"){
+    //              Materialize.toast("Comentário realizado com Sucesso", 4000);
+    //              // Inserir mensagem
+    //              let msg =  $("#comentario #hident2").val();
+    //              $("#listaComentarios").prepend("<li><b>"+response.msg+"</b> "+msg+"</li>");
+    //         }else{
+    //             Materialize.toast("Erro ao Comentar", 4000);
+    //             console.log(response);
+    //         }
+    //     }).fail(function(response){
+    //         Materialize.toast("Erro no Servidor", 4000);
+    //         console.log(response);
+    //     });
+    //     return false;
+    // });
 }
 //ToolTip
 $(document).ready(function(){

@@ -18,6 +18,7 @@
 /projeto/#ProjectId/apagar                      ApagarProjR     POST
 !/projeto/#ProjectId                            PerfilProjectR  GET
 /comentar/#ProjectId                            ComentarProjectR POST
+/comentario/del                                 DelComentarioR  DELETE
 /project/#ProjectId                             ProjectR        GET
 
 -- Busca

@@ -8,7 +8,7 @@ module Handler.Project where
 
 import Import
 import Text.Cassius()
-import Database.Persist.Postgresql
+import Database.Persist.Postgresql(toSqlKey, fromSqlKey)
 import Handler.Form
 import Data.Maybe
 import Handler.Utils
@@ -18,7 +18,7 @@ getCadProjR :: Handler Html
 getCadProjR = do
     (logged, mUser) <- isLogged
     (Just user) <- lookupSession "_USERID"
-    userId <- return $ (P.read . unpack $ user)
+    userId <- return $ (toSqlKey . P.read . unpack $ user)
     (widget, enctype) <- generateFormPost (formProject userId)
     defaultLayout $ do
         setTitle "Talaka Pocket - Cadastro Projeto"
@@ -28,7 +28,7 @@ getCadProjR = do
 postCadProjR :: Handler Html
 postCadProjR = do
     (Just user) <- lookupSession "_USERID"
-    userId <- return $ (P.read . unpack $ user) :: Handler UserId
+    userId <- return $ (toSqlKey . P.read . unpack $ user) :: Handler UserId
     ((result,_),_) <- runFormPost (formProject userId) 
     case result of
         FormSuccess project -> do
@@ -78,19 +78,6 @@ getPerfilProjectR projectId = do
                     (wid, enc) <- generateFormPost formFinancing
                     defaultLayout $ do
                         setTitle "Talaka Pocket - Página de Campanha"
-                        toWidget [julius|
-                            $("#go").click(function(){
-                                let pid = parseInt($("#pid").val());
-                                $.ajax({
-                                    url: "",
-                                    type: "POST",
-                                    success: function(result) {
-                                        alert(JSON.stringify(result));
-                                    },
-                                    dataType: "json"
-                                });
-                            });
-                        |]
                         $(whamletFile "templates/project.hamlet")
                 Just 1 -> do
                     case mProj of
